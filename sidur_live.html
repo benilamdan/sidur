@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2b6cb0">
+<title>סידור עבודה</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+    color: white;
+    padding: 18px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  header h1 { font-size: 1.5rem; }
+  header .week-label { font-size: 0.9rem; opacity: 0.85; }
+
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 0 20px;
+  }
+  .tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border-bottom: 3px solid transparent;
+    color: #718096;
+    transition: all 0.2s;
+  }
+  .tab.active { color: #2b6cb0; border-bottom-color: #2b6cb0; font-weight: 600; }
+  .tab:hover { color: #2b6cb0; }
+
+  .container { padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+
+  /* TODAY VIEW */
+  .today-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .today-header {
+    background: linear-gradient(135deg, #38a169, #276749);
+    color: white;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .shift-list { padding: 16px; }
+  .shift-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #f7fafc;
+    border-right: 4px solid #38a169;
+  }
+  .shift-item .role { font-weight: 600; color: #2d3748; min-width: 140px; }
+  .shift-item .name { color: #4a5568; }
+  .shift-item .time { margin-right: auto; color: #718096; font-size: 0.85rem; }
+  .no-data { color: #a0aec0; padding: 20px; text-align: center; font-style: italic; }
+
+  /* WEEK VIEW */
+  .week-grid { display: grid; gap: 12px; }
+  .day-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
+  .day-card.today-day { box-shadow: 0 0 0 2px #38a169, 0 2px 12px rgba(56,161,105,0.2); }
+  .day-header {
+    padding: 10px 16px;
+    background: #edf2f7;
+    font-weight: 600;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-card.today-day .day-header { background: #c6f6d5; color: #276749; }
+  .today-badge {
+    background: #38a169;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .day-body { padding: 10px 16px; }
+  .day-shift {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+  }
+  .day-shift:last-child { border-bottom: none; }
+  .day-shift .dr { color: #718096; min-width: 130px; }
+  .day-shift .dn { color: #2d3748; font-weight: 500; }
+
+  /* EMPLOYEE VIEW */
+  .search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .search-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    font-family: inherit;
+  }
+  .search-box input:focus { border-color: #2b6cb0; }
+  .search-box button {
+    padding: 12px 24px;
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .search-box button:hover { background: #2c5282; }
+
+  .emp-result {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .emp-header {
+    background: linear-gradient(135deg, #6b46c1, #553c9a);
+    color: white;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .emp-week { padding: 16px; }
+  .emp-day {
+    display: flex;
+    gap: 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+  .emp-day.has-shift { background: #f0f4ff; border-right: 3px solid #6b46c1; }
+  .emp-day.today-emp { background: #f0fff4; border-right: 3px solid #38a169; }
+  .emp-day.no-shift { opacity: 0.5; }
+  .emp-day .eday { min-width: 80px; font-weight: 600; color: #4a5568; }
+  .emp-day .eshift { color: #2d3748; }
+  .emp-day .eoff { color: #a0aec0; font-style: italic; }
+
+  /* ADMIN VIEW */
+  .admin-login {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 380px;
+    margin: 0 auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .admin-login h2 { margin-bottom: 20px; color: #2d3748; }
+  .admin-login input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-family: inherit;
+    text-align: center;
+  }
+  .admin-login button {
+    width: 100%;
+    padding: 12px;
+    background: #c53030;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .admin-login button:hover { background: #9b2c2c; }
+  .err { color: #c53030; font-size: 0.85rem; margin-top: 8px; }
+
+  .admin-panel h2 { margin-bottom: 20px; color: #2d3748; }
+  .admin-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .admin-toolbar input, .admin-toolbar select {
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .admin-toolbar input:focus, .admin-toolbar select:focus { border-color: #2b6cb0; }
+  .btn { padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-family: inherit; }
+  .btn-blue { background: #2b6cb0; color: white; }
+  .btn-blue:hover { background: #2c5282; }
+  .btn-green { background: #38a169; color: white; }
+  .btn-green:hover { background: #276749; }
+  .btn-red { background: #c53030; color: white; }
+  .btn-red:hover { background: #9b2c2c; }
+  .btn-gray { background: #718096; color: white; }
+  .btn-gray:hover { background: #4a5568; }
+  .btn-orange { background: #dd6b20; color: white; }
+  .btn-orange:hover { background: #c05621; }
+
+  .schedule-table {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .schedule-table th {
+    background: #2b6cb0;
+    color: white;
+    padding: 12px 10px;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  .schedule-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table tr:hover td { background: #f7fafc; }
+  .schedule-table td input, .schedule-table td select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background: #f7fafc;
+  }
+  .schedule-table td input:focus, .schedule-table td select:focus {
+    outline: none;
+    border-color: #2b6cb0;
+    background: white;
+  }
+  .del-btn {
+    background: none;
+    border: none;
+    color: #fc8181;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+  }
+  .del-btn:hover { color: #c53030; }
+
+  .week-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+  }
+  .week-selector label { font-weight: 600; color: #4a5568; }
+  .week-selector input[type=date] {
+    padding: 6px 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .week-selector input[type=date]:focus { border-color: #2b6cb0; }
+
+  .save-bar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .save-bar span { color: #718096; font-size: 0.85rem; flex: 1; }
+
+  .hidden { display: none !important; }
+
+  /* mobile card-style shift editing */
+  .shift-edit-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .shift-edit-card .card-day {
+    font-weight: 700;
+    color: #2b6cb0;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  .shift-edit-card .field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .shift-edit-card label { font-size: 0.8rem; color: #718096; }
+  .shift-edit-card input, .shift-edit-card select {
+    padding: 9px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+  }
+  .shift-edit-card input:focus, .shift-edit-card select:focus { border-color: #2b6cb0; }
+  .shift-edit-card .card-actions { display: flex; justify-content: flex-end; }
+  .add-form-card {
+    background: #f0f7ff;
+    border: 2px dashed #90cdf4;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .add-form-card h3 { color: #2b6cb0; margin-bottom: 12px; font-size: 1rem; }
+  .add-form-card .field-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .add-form-card label { font-size: 0.8rem; color: #4a5568; font-weight: 600; }
+  .add-form-card input, .add-form-card select {
+    padding: 10px 12px;
+    border: 1.5px solid #bee3f8;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+    background: white;
+  }
+  .add-form-card input:focus, .add-form-card select:focus { border-color: #2b6cb0; }
+
+  /* ── BOTTOM NAV (mobile) ── */
+  .bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-inner {
+    display: flex;
+    height: 62px;
+  }
+  .bnav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    color: #a0aec0;
+    font-size: 0.68rem;
+    border: none;
+    background: none;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s;
+  }
+  .bnav-btn .icon { font-size: 1.5rem; line-height: 1; }
+  .bnav-btn.active { color: #2b6cb0; }
+  .bnav-btn.active .icon { transform: scale(1.1); }
+
+  /* ── DESKTOP TABS ── */
+  .tabs { display: flex; background: #fff; border-bottom: 2px solid #e2e8f0; padding: 0 20px; }
+  .tab { padding: 12px 24px; cursor: pointer; font-size: 0.95rem; border-bottom: 3px solid transparent; color: #718096; transition: all 0.2s; }
+  .tab.active { color: #2b6cb0; border-bottom-color: #2b6cb0; font-weight: 600; }
+  .tab:hover { color: #2b6cb0; }
+
+  /* ── MOBILE OVERRIDES ── */
+  @media (max-width: 640px) {
+    .tabs { display: none; }
+    .bottom-nav { display: block; }
+    .container { padding: 16px 14px 80px; }
+    header { padding: 14px 16px; }
+    header h1 { font-size: 1.25rem; }
+
+    .shift-item { flex-wrap: wrap; gap: 4px; }
+    .shift-item .time { margin-right: 0; width: 100%; }
+    .shift-item .role { min-width: unset; font-size: 1rem; }
+    .shift-item .name { font-size: 1rem; }
+    .shift-item { padding: 14px 16px; }
+
+    .day-header { font-size: 1rem; padding: 12px 16px; }
+    .day-shift { font-size: 1rem; padding: 8px 0; }
+    .day-shift .dr { min-width: 90px; }
+
+    .search-box input { font-size: 1rem; padding: 14px 16px; }
+    .search-box button { padding: 14px 20px; font-size: 1rem; }
+    .emp-day { padding: 12px 14px; }
+    .emp-day .eday { min-width: 70px; font-size: 0.9rem; }
+    .emp-day .eshift { font-size: 0.95rem; }
+
+    .schedule-table { display: none; }
+    #mobileCards { display: block; }
+    .week-selector { flex-wrap: wrap; gap: 8px; }
+    .week-selector input[type=date] { flex: 1; min-width: 140px; }
+    .save-bar { flex-direction: column; }
+    .save-bar button { width: 100%; padding: 14px; font-size: 1rem; }
+    .admin-toolbar { flex-direction: column; }
+    .admin-toolbar input, .admin-toolbar select, .admin-toolbar .btn { width: 100%; padding: 12px; font-size: 1rem; }
+
+    .today-header { font-size: 1.05rem; padding: 14px 18px; }
+    .no-data { font-size: 1rem; padding: 24px; }
+  }
+  @media (min-width: 641px) {
+    #mobileCards { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋 סידור עבודה</h1>
+  <span class="week-label" id="headerWeek"></span>
+</header>
+
+<!-- Desktop tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('today')">היום</div>
+  <div class="tab" onclick="showTab('week')">כל השבוע</div>
+  <div class="tab" onclick="showTab('employee')">חיפוש עובד</div>
+  <div class="tab" onclick="showTab('admin')">ניהול 🔒</div>
+</div>
+
+<!-- Mobile bottom nav -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bnav-btn active" id="bn-today" onclick="showTab('today')">
+      <span class="icon">☀️</span><span>היום</span>
+    </button>
+    <button class="bnav-btn" id="bn-week" onclick="showTab('week')">
+      <span class="icon">📅</span><span>שבוע</span>
+    </button>
+    <button class="bnav-btn" id="bn-employee" onclick="showTab('employee')">
+      <span class="icon">🔍</span><span>עובד</span>
+    </button>
+    <button class="bnav-btn" id="bn-admin" onclick="showTab('admin')">
+      <span class="icon">⚙️</span><span>ניהול</span>
+    </button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- TODAY TAB -->
+  <div id="tab-today">
+    <div class="today-card">
+      <div class="today-header" id="todayTitle">משמרות היום</div>
+      <div class="shift-list" id="todayList"></div>
+    </div>
+  </div>
+
+  <!-- WEEK TAB -->
+  <div id="tab-week" class="hidden">
+    <div class="week-grid" id="weekGrid"></div>
+  </div>
+
+  <!-- EMPLOYEE TAB -->
+  <div id="tab-employee" class="hidden">
+    <div class="search-box">
+      <input type="text" id="empSearch" placeholder="הכנס שם עובד..." onkeydown="if(event.key==='Enter')searchEmp()">
+      <button onclick="searchEmp()">חפש</button>
+    </div>
+    <div id="empResult"></div>
+  </div>
+
+  <!-- ADMIN TAB -->
+  <div id="tab-admin" class="hidden">
+    <div id="adminLogin" class="admin-login">
+      <h2>🔒 כניסת מנהל</h2>
+      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()">
+      <button onclick="adminLogin()">כניסה</button>
+      <div class="err hidden" id="adminErr">סיסמה שגויה</div>
+    </div>
+    <div id="adminPanel" class="admin-panel hidden">
+      <div class="week-selector">
+        <label>שבוע:</label>
+        <input type="date" id="weekStart" onchange="changeWeek()">
+        <button class="btn btn-gray" onclick="prevWeek()">◀ שבוע קודם</button>
+        <button class="btn btn-gray" onclick="nextWeek()">שבוע הבא ▶</button>
+      </div>
+
+      <div class="admin-toolbar">
+        <select id="newDay">
+          <option value="0">ראשון</option>
+          <option value="1">שני</option>
+          <option value="2">שלישי</option>
+          <option value="3">רביעי</option>
+          <option value="4">חמישי</option>
+          <option value="5">שישי</option>
+          <option value="6">שבת</option>
+        </select>
+        <input type="text" id="newRole" placeholder="תפקיד / משמרת">
+        <input type="text" id="newName" placeholder="שם עובד">
+        <input type="text" id="newTime" placeholder="שעות (לדוג' 07:00-15:00)">
+        <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
+      </div>
+
+      <!-- DESKTOP TABLE -->
+      <div class="schedule-table">
+        <table>
+          <thead>
+            <tr>
+              <th>יום</th>
+              <th>תפקיד / משמרת</th>
+              <th>עובד</th>
+              <th>שעות</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="adminTable"></tbody>
+        </table>
+      </div>
+
+      <!-- MOBILE CARDS -->
+      <div id="mobileCards"></div>
+
+      <div class="save-bar">
+        <span>לאחר שמירה — הורד והעלה ל-GitHub</span>
+        <button class="btn btn-orange" onclick="adminLogout()">התנתק</button>
+        <button class="btn btn-green" onclick="downloadHTML()">💾 הורד HTML מעודכן</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// DATA — עדכן כאן את הסידור (או השתמש במצב מנהל)
+// ============================================================
+const ADMIN_PASSWORD = "1234"; // ← שנה סיסמה!
+
+// weekStart: תאריך ראשון של השבוע (ראשון) בפורמט YYYY-MM-DD
+let scheduleData = {
+  weekStart: "2026-03-01",
+  shifts: [
+    {"day":0,"role":"בוקר","name":"דני וודגה","time":""},
+    {"day":1,"role":"בוקר","name":"דני וודגה","time":""},
+    {"day":2,"role":"בוקר","name":"דני וודגה","time":""},
+    {"day":3,"role":"בוקר","name":"דני וודגה","time":""},
+    {"day":4,"role":"בוקר","name":"דני וודגה","time":""},
+    {"day":6,"role":"פרסונל20:00","name":"דני וודגה","time":""},
+    {"day":0,"role":"ג","name":"פנטה טגאיא","time":""},
+    {"day":1,"role":"פ","name":"פנטה טגאיא","time":""},
+    {"day":2,"role":"א","name":"פנטה טגאיא","time":""},
+    {"day":3,"role":"בוקר","name":"צ'קולה בדמאו","time":""},
+    {"day":4,"role":"בוקר","name":"צ'קולה בדמאו","time":""},
+    {"day":5,"role":"בוקר","name":"בלאצ'או הבטאם","time":""},
+    {"day":1,"role":"בוקר","name":"יהונה גוואדי","time":""},
+    {"day":2,"role":"בוקר","name":"יהונה גוואדי","time":""},
+    {"day":5,"role":"בוקר","name":"יהונה גוואדי","time":""},
+    {"day":6,"role":"בוקר","name":"יהונה גוואדי","time":""},
+    {"day":0,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":1,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":2,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":3,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":4,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":5,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":6,"role":"ערב","name":"טספיי אצנפה","time":""},
+    {"day":1,"role":"ערב","name":"מלאק אבבה","time":""},
+    {"day":2,"role":"ערב","name":"מלאק אבבה","time":""},
+    {"day":4,"role":"ערב","name":"מלאק אבבה","time":""},
+    {"day":5,"role":"בוקר","name":"מלאק אבבה","time":""},
+    {"day":6,"role":"בוקר","name":"מלאק אבבה","time":""},
+    {"day":0,"role":"ערב","name":"גטא'צ'או אסאייה","time":""},
+    {"day":1,"role":"ערב","name":"גטא'צ'או אסאייה","time":""},
+    {"day":2,"role":"ערב","name":"גטא'צ'או אסאייה","time":""},
+    {"day":3,"role":"ערב","name":"גטא'צ'או אסאייה","time":""},
+    {"day":4,"role":"ערב","name":"גטא'צ'או אסאייה","time":""},
+    {"day":5,"role":"ערב א","name":"גטא'צ'או אסאייה","time":""},
+    {"day":0,"role":"בוקר","name":"אברראו צקול","time":""},
+    {"day":2,"role":"בוקר","name":"אברראו צקול","time":""},
+    {"day":3,"role":"בוקר","name":"אברראו צקול","time":""},
+    {"day":5,"role":"בוקר","name":"אברראו צקול","time":""},
+    {"day":0,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":1,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":3,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":4,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":5,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":6,"role":"בוקר","name":"מספון דלנסאו","time":""},
+    {"day":0,"role":"ערב","name":"אקלילו עלמסט","time":""},
+    {"day":2,"role":"ערב","name":"אקלילו עלמסט","time":""},
+    {"day":3,"role":"ערב","name":"אקלילו עלמסט","time":""},
+    {"day":4,"role":"ערב","name":"אקלילו עלמסט","time":""},
+    {"day":5,"role":"בוקר","name":"אקלילו עלמסט","time":""},
+    {"day":0,"role":"ערב","name":"אדמה וודנך","time":""},
+    {"day":1,"role":"ערב","name":"אדמה וודנך","time":""},
+    {"day":2,"role":"ערב","name":"אדמה וודנך","time":""},
+    {"day":3,"role":"ערב","name":"אדמה וודנך","time":""},
+    {"day":4,"role":"ערב","name":"אדמה וודנך","time":""},
+    {"day":0,"role":"בוקר","name":"עמי טשאלה","time":""},
+    {"day":2,"role":"בוקר","name":"עמי טשאלה","time":""},
+    {"day":3,"role":"בוקר","name":"עמי טשאלה","time":""},
+    {"day":4,"role":"בוקר","name":"עמי טשאלה","time":""},
+    {"day":5,"role":"בוקר","name":"עמי טשאלה","time":""},
+    {"day":1,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":2,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":3,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":4,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":5,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":6,"role":"ערב","name":"וודו אספה","time":""},
+    {"day":2,"role":"בוקר","name":"אבינט אבאוה","time":""},
+    {"day":4,"role":"בוקר","name":"אבינט אבאוה","time":""},
+    {"day":5,"role":"בוקר","name":"אבינט אבאוה","time":""},
+    {"day":6,"role":"בוקר","name":"אבינט אבאוה","time":""},
+    {"day":0,"role":"בוקר","name":"אילה אונקאהונה","time":""},
+    {"day":1,"role":"בוקר","name":"אילה אונקאהונה","time":""},
+    {"day":2,"role":"בוקר","name":"אילה אונקאהונה","time":""},
+    {"day":3,"role":"בוקר","name":"אילה אונקאהונה","time":""},
+    {"day":4,"role":"בוקר","name":"אילה אונקאהונה","time":""},
+    {"day":5,"role":"בוקר","name":"מולה קאסה","time":""},
+    {"day":1,"role":"ערב","name":"אדנה בזה","time":""},
+    {"day":2,"role":"ערב","name":"אדנה בזה","time":""},
+    {"day":3,"role":"ערב","name":"אדנה בזה","time":""},
+    {"day":4,"role":"ערב","name":"אדנה בזה","time":""},
+    {"day":6,"role":"בוקר","name":"אדנה בזה","time":""},
+    {"day":0,"role":"בוקר","name":"אלמו ביקאייה","time":""},
+    {"day":1,"role":"בוקר","name":"אלמו ביקאייה","time":""},
+    {"day":2,"role":"בוקר","name":"אלמו ביקאייה","time":""},
+    {"day":0,"role":"בוקר","name":"שימונוב ניסן","time":""},
+    {"day":2,"role":"בוקר","name":"שימונוב ניסן","time":""},
+    {"day":3,"role":"בוקר","name":"שימונוב ניסן","time":""},
+    {"day":4,"role":"בוקר","name":"שימונוב ניסן","time":""},
+    {"day":0,"role":"בוקר","name":"חיים כהן","time":""},
+    {"day":3,"role":"בוקר","name":"חיים כהן","time":""},
+    {"day":4,"role":"בוקר","name":"חיים כהן","time":""},
+    {"day":0,"role":"ערב","name":"בתיה אלמיהו","time":""},
+    {"day":1,"role":"בוקר","name":"בתיה אלמיהו","time":""},
+    {"day":2,"role":"ערב","name":"בתיה אלמיהו","time":""},
+    {"day":3,"role":"בוקר","name":"בתיה אלמיהו","time":""},
+    {"day":4,"role":"בוקר","name":"בתיה אלמיהו","time":""},
+    {"day":0,"role":"בוקר","name":"טקלה פקדו טזרה","time":""},
+    {"day":1,"role":"בוקר","name":"טקלה פקדו טזרה","time":""},
+    {"day":2,"role":"בוקר","name":"טקלה פקדו טזרה","time":""},
+    {"day":3,"role":"בוקר","name":"טקלה פקדו טזרה","time":""},
+    {"day":4,"role":"בוקר","name":"טקלה פקדו טזרה","time":""},
+    {"day":0,"role":"ערב","name":"אמה אראנוב","time":""},
+    {"day":1,"role":"ערב","name":"אמה אראנוב","time":""},
+    {"day":3,"role":"ערב","name":"אמה אראנוב","time":""},
+    {"day":4,"role":"ערב","name":"אמה אראנוב","time":""},
+    {"day":0,"role":"בוקר","name":"לריסה גולקרוב","time":""},
+    {"day":2,"role":"בוקר","name":"לריסה גולקרוב","time":""},
+    {"day":3,"role":"בוקר","name":"לריסה גולקרוב","time":""},
+    {"day":4,"role":"בוקר","name":"לריסה גולקרוב","time":""},
+    {"day":0,"role":"בוקר","name":"יפה קוניו","time":""},
+    {"day":1,"role":"ערב","name":"יפה קוניו","time":""},
+    {"day":2,"role":"בוקר","name":"יפה קוניו","time":""},
+    {"day":3,"role":"בוקר","name":"יפה קוניו","time":""},
+    {"day":4,"role":"ערב","name":"יפה קוניו","time":""},
+    {"day":0,"role":"בוקר","name":"גלית עזר אוזר","time":""},
+    {"day":1,"role":"בוקר","name":"גלית עזר אוזר","time":""},
+    {"day":2,"role":"בוקר","name":"גלית עזר אוזר","time":""},
+    {"day":3,"role":"בוקר","name":"גלית עזר אוזר","time":""},
+    {"day":4,"role":"בוקר","name":"גלית עזר אוזר","time":""}
+  ]
+};
+// ============================================================
+
+const DAYS_HE = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+const DAYS_JS = [0,1,2,3,4,5,6]; // JS: 0=Sun
+
+let currentTab = 'today';
+let adminLoggedIn = false;
+
+function parseWeekStart() {
+  return new Date(scheduleData.weekStart + "T00:00:00");
+}
+
+function getWeekDates() {
+  const ws = parseWeekStart();
+  return DAYS_HE.map((_, i) => {
+    const d = new Date(ws);
+    d.setDate(ws.getDate() + i);
+    return d;
+  });
+}
+
+function todayIndex() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const dates = getWeekDates();
+  return dates.findIndex(d => d.toDateString() === today.toDateString());
+}
+
+function formatDate(d) {
+  return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+}
+
+function showTab(name) {
+  ['today','week','employee','admin'].forEach(t => {
+    document.getElementById('tab-' + t).classList.add('hidden');
+  });
+  document.getElementById('tab-' + name).classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach((el, i) => {
+    el.classList.toggle('active', ['today','week','employee','admin'][i] === name);
+  });
+  ['today','week','employee','admin'].forEach(t => {
+    const bn = document.getElementById('bn-' + t);
+    if (bn) bn.classList.toggle('active', t === name);
+  });
+  currentTab = name;
+  window.scrollTo(0, 0);
+  if (name === 'today') renderToday();
+  if (name === 'week') renderWeek();
+  if (name === 'admin' && adminLoggedIn) renderAdminTable();
+}
+
+// ---- HEADER ----
+function updateHeader() {
+  const dates = getWeekDates();
+  const start = dates[0], end = dates[6];
+  document.getElementById('headerWeek').textContent =
+    `שבוע ${formatDate(start)} – ${formatDate(end)}`;
+  const ws = parseWeekStart();
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+}
+
+// ---- TODAY ----
+function renderToday() {
+  const ti = todayIndex();
+  const list = document.getElementById('todayList');
+  const title = document.getElementById('todayTitle');
+  const dates = getWeekDates();
+
+  if (ti === -1) {
+    title.textContent = "אין סידור לשבוע זה";
+    list.innerHTML = '<div class="no-data">הסידור הנוכחי אינו כולל את היום</div>';
+    return;
+  }
+
+  const today = dates[ti];
+  title.textContent = `משמרות היום — ${DAYS_HE[ti]}, ${formatDate(today)}`;
+
+  const shifts = scheduleData.shifts.filter(s => s.day === ti);
+  if (!shifts.length) {
+    list.innerHTML = '<div class="no-data">אין משמרות מוגדרות להיום</div>';
+    return;
+  }
+  list.innerHTML = shifts.map(s => `
+    <div class="shift-item">
+      <span class="role">${s.role}</span>
+      <span class="name">${s.name}</span>
+      <span class="time">${s.time || ''}</span>
+    </div>
+  `).join('');
+}
+
+// ---- WEEK ----
+function renderWeek() {
+  const dates = getWeekDates();
+  const ti = todayIndex();
+  const grid = document.getElementById('weekGrid');
+  grid.innerHTML = dates.map((d, i) => {
+    const shifts = scheduleData.shifts.filter(s => s.day === i);
+    const isToday = i === ti;
+    return `
+      <div class="day-card ${isToday ? 'today-day' : ''}">
+        <div class="day-header">
+          ${DAYS_HE[i]}, ${formatDate(d)}
+          ${isToday ? '<span class="today-badge">היום</span>' : ''}
+        </div>
+        <div class="day-body">
+          ${shifts.length ? shifts.map(s => `
+            <div class="day-shift">
+              <span class="dr">${s.role}</span>
+              <span class="dn">${s.name}${s.time ? ' · ' + s.time : ''}</span>
+            </div>
+          `).join('') : '<div class="no-data" style="padding:8px 0;font-size:0.85rem">אין משמרות</div>'}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ---- EMPLOYEE ----
+function searchEmp() {
+  const q = document.getElementById('empSearch').value.trim().toLowerCase();
+  const res = document.getElementById('empResult');
+  if (!q) { res.innerHTML = ''; return; }
+
+  const dates = getWeekDates();
+  const ti = todayIndex();
+
+  const rows = dates.map((d, i) => {
+    const myShifts = scheduleData.shifts.filter(s => s.day === i && s.name.toLowerCase().includes(q));
+    const isToday = i === ti;
+    const cls = myShifts.length ? (isToday ? 'emp-day today-emp' : 'emp-day has-shift') : 'emp-day no-shift';
+    return `<div class="${cls}">
+      <span class="eday">${DAYS_HE[i]} ${formatDate(d)}</span>
+      ${myShifts.length
+        ? myShifts.map(s => `<span class="eshift">${s.role}${s.time ? ' · ' + s.time : ''}</span>`).join(' | ')
+        : '<span class="eoff">חופש / לא בסידור</span>'
+      }
+    </div>`;
+  }).join('');
+
+  res.innerHTML = `
+    <div class="emp-result">
+      <div class="emp-header">סידור שבועי — "${document.getElementById('empSearch').value.trim()}"</div>
+      <div class="emp-week">${rows}</div>
+    </div>`;
+}
+
+// ---- ADMIN LOGIN ----
+function adminLogin() {
+  const p = document.getElementById('adminPass').value;
+  if (p === ADMIN_PASSWORD) {
+    adminLoggedIn = true;
+    document.getElementById('adminLogin').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
+    document.getElementById('weekStart').value = scheduleData.weekStart;
+    renderAdminTable();
+  } else {
+    document.getElementById('adminErr').classList.remove('hidden');
+  }
+}
+function adminLogout() {
+  adminLoggedIn = false;
+  document.getElementById('adminLogin').classList.remove('hidden');
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('adminPass').value = '';
+  document.getElementById('adminErr').classList.add('hidden');
+}
+
+// ---- ADMIN TABLE ----
+function renderAdminTable() {
+  const sorted = [...scheduleData.shifts].sort((a,b) => a.day - b.day || (a.role > b.role ? 1 : -1));
+
+  // Desktop table
+  const tbody = document.getElementById('adminTable');
+  tbody.innerHTML = sorted.map(s => {
+    const idx = scheduleData.shifts.indexOf(s);
+    return `<tr>
+      <td>
+        <select onchange="updateShift(${idx},'day',this.value)">
+          ${DAYS_HE.map((d,di) => `<option value="${di}" ${s.day==di?'selected':''}>${d}</option>`).join('')}
+        </select>
+      </td>
+      <td><input value="${s.role}" onchange="updateShift(${idx},'role',this.value)"></td>
+      <td><input value="${s.name}" onchange="updateShift(${idx},'name',this.value)"></td>
+      <td><input value="${s.time||''}" onchange="updateShift(${idx},'time',this.value)"></td>
+      <td><button class="del-btn" onclick="deleteShift(${idx})">🗑</button></td>
+    </tr>`;
+  }).join('');
+
+  // Mobile cards
+  const mc = document.getElementById('mobileCards');
+  // Add-shift form at top
+  const addForm = `
+    <div class="add-form-card">
+      <h3>+ הוסף משמרת</h3>
+      <div class="field-row"><label>יום</label>
+        <select id="m_newDay">
+          ${DAYS_HE.map((d,i)=>`<option value="${i}">${d}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field-row"><label>משמרת / תפקיד</label><input id="m_newRole" placeholder="בוקר / ערב..."></div>
+      <div class="field-row"><label>שם עובד</label><input id="m_newName" placeholder="שם מלא"></div>
+      <div class="field-row"><label>שעות</label><input id="m_newTime" placeholder="07:00-15:00"></div>
+      <button class="btn btn-blue" style="width:100%;padding:12px;font-size:1rem;" onclick="mobileAddShift()">הוסף</button>
+    </div>`;
+
+  const cards = sorted.map(s => {
+    const idx = scheduleData.shifts.indexOf(s);
+    return `
+      <div class="shift-edit-card">
+        <div class="card-day">${DAYS_HE[s.day]}</div>
+        <div class="field-row"><label>משמרת</label>
+          <input value="${s.role}" onchange="updateShift(${idx},'role',this.value)">
+        </div>
+        <div class="field-row"><label>עובד</label>
+          <input value="${s.name}" onchange="updateShift(${idx},'name',this.value)">
+        </div>
+        <div class="field-row"><label>שעות</label>
+          <input value="${s.time||''}" placeholder="07:00-15:00" onchange="updateShift(${idx},'time',this.value)">
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-red" onclick="deleteShift(${idx})">מחק 🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  mc.innerHTML = addForm + cards;
+}
+
+function mobileAddShift() {
+  const day = parseInt(document.getElementById('m_newDay').value);
+  const role = document.getElementById('m_newRole').value.trim();
+  const name = document.getElementById('m_newName').value.trim();
+  const time = document.getElementById('m_newTime').value.trim();
+  if (!role || !name) { alert('נא למלא משמרת ושם'); return; }
+  scheduleData.shifts.push({ day, role, name, time });
+  renderAdminTable();
+}
+
+function updateShift(idx, field, val) {
+  if (field === 'day') scheduleData.shifts[idx].day = parseInt(val);
+  else scheduleData.shifts[idx][field] = val;
+}
+
+function deleteShift(idx) {
+  if (!confirm('למחוק משמרת זו?')) return;
+  scheduleData.shifts.splice(idx, 1);
+  renderAdminTable();
+}
+
+function addShift() {
+  const day = parseInt(document.getElementById('newDay').value);
+  const role = document.getElementById('newRole').value.trim();
+  const name = document.getElementById('newName').value.trim();
+  const time = document.getElementById('newTime').value.trim();
+  if (!role || !name) { alert('נא למלא תפקיד ושם'); return; }
+  scheduleData.shifts.push({ day, role, name, time });
+  document.getElementById('newRole').value = '';
+  document.getElementById('newName').value = '';
+  document.getElementById('newTime').value = '';
+  renderAdminTable();
+}
+
+// ---- WEEK NAVIGATION ----
+function changeWeek() {
+  scheduleData.weekStart = document.getElementById('weekStart').value;
+  updateHeader();
+  if (currentTab !== 'admin') showTab(currentTab);
+  else { renderAdminTable(); }
+}
+
+function prevWeek() {
+  const d = parseWeekStart();
+  d.setDate(d.getDate() - 7);
+  scheduleData.weekStart = d.toISOString().slice(0,10);
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+  updateHeader();
+  renderAdminTable();
+}
+
+function nextWeek() {
+  const d = parseWeekStart();
+  d.setDate(d.getDate() + 7);
+  scheduleData.weekStart = d.toISOString().slice(0,10);
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+  updateHeader();
+  renderAdminTable();
+}
+
+// ---- DOWNLOAD UPDATED HTML ----
+function downloadHTML() {
+  const html = document.documentElement.outerHTML;
+  // inject updated data
+  const dataStr = JSON.stringify(scheduleData, null, 2);
+  const updated = html.replace(
+    /let scheduleData = \{[\s\S]*?\n\};/,
+    'let scheduleData = ' + dataStr + ';'
+  );
+  const blob = new Blob([updated], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'sidur_live.html';
+  a.click();
+}
+
+// ---- INIT ----
+updateHeader();
+renderToday();
+</script>
+</body>
+</html>

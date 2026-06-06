@@ -563,10 +563,21 @@
       <div id="mobileCards"></div>
 
       <div class="save-bar">
-        <span>לאחר שמירה — הורד והעלה ל-GitHub</span>
+        <div id="githubSection" style="width:100%">
+          <div id="tokenSetup" style="display:flex;flex-direction:column;gap:8px;width:100%">
+            <input type="password" id="ghToken" placeholder="🔑 הכנס GitHub Token (פעם אחת)" style="padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;width:100%">
+            <button class="btn btn-blue" style="width:100%;padding:12px" onclick="saveToken()">שמור Token</button>
+          </div>
+          <div id="publishBar" style="display:none;gap:10px;flex-wrap:wrap">
+            <span style="color:#718096;font-size:0.85rem;flex:1">Token שמור — מוכן לפרסום</span>
+            <button class="btn btn-gray" onclick="clearToken()">🔑 שנה Token</button>
+            <button class="btn btn-green" style="padding:12px 20px;font-size:1rem" onclick="publishToGitHub()">🌐 שמור לכולם</button>
+          </div>
+        </div>
         <button class="btn btn-orange" onclick="adminLogout()">התנתק</button>
-        <button class="btn btn-green" onclick="downloadHTML()">💾 הורד HTML מעודכן</button>
+        <button class="btn btn-gray" onclick="downloadHTML()">💾 הורד HTML</button>
       </div>
+      <div id="publishStatus" style="margin-top:10px;padding:10px;border-radius:8px;display:none;font-size:0.9rem;text-align:center"></div>
     </div>
   </div>
 
@@ -856,6 +867,7 @@ function adminLogin() {
     document.getElementById('adminLogin').classList.add('hidden');
     document.getElementById('adminPanel').classList.remove('hidden');
     document.getElementById('weekStart').value = scheduleData.weekStart;
+    initTokenUI();
     renderAdminTable();
   } else {
     document.getElementById('adminErr').classList.remove('hidden');
@@ -988,6 +1000,79 @@ function nextWeek() {
   document.getElementById('weekStart').value = scheduleData.weekStart;
   updateHeader();
   renderAdminTable();
+}
+
+// ---- GITHUB TOKEN ----
+const GH_REPO = 'benilamdan/sidur';
+const GH_FILE = 'sidur_live.html';
+
+function saveToken() {
+  const t = document.getElementById('ghToken').value.trim();
+  if (!t.startsWith('ghp_')) { alert('טוקן לא תקין — חייב להתחיל ב-ghp_'); return; }
+  sessionStorage.setItem('ghToken', t);
+  document.getElementById('tokenSetup').style.display = 'none';
+  document.getElementById('publishBar').style.display = 'flex';
+}
+
+function clearToken() {
+  sessionStorage.removeItem('ghToken');
+  document.getElementById('ghToken').value = '';
+  document.getElementById('tokenSetup').style.display = 'flex';
+  document.getElementById('publishBar').style.display = 'none';
+}
+
+function initTokenUI() {
+  const t = sessionStorage.getItem('ghToken');
+  if (t) {
+    document.getElementById('tokenSetup').style.display = 'none';
+    document.getElementById('publishBar').style.display = 'flex';
+  }
+}
+
+async function publishToGitHub() {
+  const token = sessionStorage.getItem('ghToken');
+  if (!token) { clearToken(); return; }
+
+  const status = document.getElementById('publishStatus');
+  status.style.display = 'block';
+  status.style.background = '#ebf8ff';
+  status.style.color = '#2b6cb0';
+  status.textContent = '⏳ מעלה לGitHub...';
+
+  try {
+    // Get current file SHA
+    const infoRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      headers: { Authorization: `token ${token}`, 'User-Agent': 'sidur-app' }
+    });
+    const info = await infoRes.json();
+    const sha = info.sha;
+
+    // Build updated HTML
+    const html = document.documentElement.outerHTML;
+    const dataStr = JSON.stringify(scheduleData, null, 2);
+    const updated = html.replace(/let scheduleData = \{[\s\S]*?\n\};/, 'let scheduleData = ' + dataStr + ';');
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
+
+    // Push to GitHub
+    const pushRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method: 'PUT',
+      headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json', 'User-Agent': 'sidur-app' },
+      body: JSON.stringify({ message: 'עדכון סידור', content: encoded, sha })
+    });
+
+    if (pushRes.ok) {
+      status.style.background = '#f0fff4';
+      status.style.color = '#276749';
+      status.textContent = '✅ עודכן בהצלחה! כל העובדים רואים את השינוי תוך דקה.';
+    } else {
+      const err = await pushRes.json();
+      throw new Error(err.message);
+    }
+  } catch (e) {
+    status.style.background = '#fff5f5';
+    status.style.color = '#c53030';
+    status.textContent = '❌ שגיאה: ' + e.message;
+  }
 }
 
 // ---- DOWNLOAD UPDATED HTML ----

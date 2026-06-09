@@ -72,6 +72,10 @@
   .shift-item .name { color: #4a5568; }
   .shift-item .time { margin-right: auto; color: #718096; font-size: 0.85rem; }
   .no-data { color: #a0aec0; padding: 20px; text-align: center; font-style: italic; }
+  .emp-suggest { padding: 12px 16px; cursor: pointer; font-size: 1rem; border-bottom: 1px solid #f0f0f0; }
+  .emp-suggest:last-child { border-bottom: none; }
+  .emp-suggest:hover { background: #ebf4ff; }
+  .emp-suggest strong { color: #2b6cb0; }
   .group-label { font-weight: 700; color: #4a5568; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 4px 4px; border-bottom: 2px solid #e2e8f0; margin-bottom: 8px; }
 
   /* WEEK VIEW */
@@ -505,11 +509,15 @@
 
   <!-- EMPLOYEE TAB -->
   <div id="tab-employee" class="hidden">
-    <div class="search-box">
-      <input type="text" id="empSearch" placeholder="הכנס שם עובד..." onkeydown="if(event.key==='Enter')searchEmp()">
-      <button onclick="searchEmp()">חפש</button>
+    <div class="search-box" style="position:relative;flex-direction:column;gap:0">
+      <div style="display:flex;gap:10px;width:100%">
+        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off"
+          oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1">
+        <button onclick="empConfirm()">חפש</button>
+      </div>
+      <div id="empDropdown" style="display:none;position:absolute;top:54px;right:0;left:0;background:white;border:2px solid #2b6cb0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:200;max-height:260px;overflow-y:auto"></div>
     </div>
-    <div id="empResult"></div>
+    <div id="empResult" style="margin-top:16px"></div>
   </div>
 
   <!-- ADMIN TAB -->
@@ -1855,34 +1863,97 @@ function renderWeek() {
   }).join('');
 }
 
-// ---- EMPLOYEE ----
-function searchEmp() {
-  const q = document.getElementById('empSearch').value.trim().toLowerCase();
-  const res = document.getElementById('empResult');
-  if (!q) { res.innerHTML = ''; return; }
+// ---- EMPLOYEE AUTOCOMPLETE ----
+let empSelectedIndex = -1;
 
+function getUniqueNames() {
+  return [...new Set(scheduleData.shifts.map(s => s.name))].sort();
+}
+
+function empAutocomplete() {
+  const q = document.getElementById('empSearch').value.trim().toLowerCase();
+  const dd = document.getElementById('empDropdown');
+  document.getElementById('empResult').innerHTML = '';
+  empSelectedIndex = -1;
+  if (q.length < 1) { dd.style.display = 'none'; return; }
+  const matches = getUniqueNames().filter(n => n.toLowerCase().includes(q));
+  if (!matches.length) { dd.style.display = 'none'; return; }
+  dd.style.display = 'block';
+  dd.innerHTML = matches.map((n, i) => `
+    <div class="emp-suggest" data-name="${n}" onclick="empSelect('${n.replace(/'/g,"\\'")}')">
+      ${n.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<strong>$1</strong>')}
+    </div>`).join('');
+}
+
+function empSelect(name) {
+  document.getElementById('empSearch').value = name;
+  document.getElementById('empDropdown').style.display = 'none';
+  empShowResult(name);
+}
+
+function empConfirm() {
+  const q = document.getElementById('empSearch').value.trim();
+  document.getElementById('empDropdown').style.display = 'none';
+  if (!q) return;
+  // find exact or best match
+  const names = getUniqueNames();
+  const exact = names.find(n => n.toLowerCase() === q.toLowerCase());
+  const partial = names.filter(n => n.toLowerCase().includes(q.toLowerCase()));
+  if (exact) empShowResult(exact);
+  else if (partial.length === 1) empShowResult(partial[0]);
+  else if (partial.length > 1) {
+    document.getElementById('empResult').innerHTML =
+      '<div class="no-data">נמצאו כמה תוצאות — בחר שם מהרשימה</div>';
+    empAutocomplete();
+  } else {
+    document.getElementById('empResult').innerHTML =
+      '<div class="no-data">לא נמצא עובד בשם זה</div>';
+  }
+}
+
+function empKeyNav(e) {
+  const dd = document.getElementById('empDropdown');
+  const items = dd.querySelectorAll('.emp-suggest');
+  if (!items.length) { if (e.key === 'Enter') empConfirm(); return; }
+  if (e.key === 'ArrowDown') { empSelectedIndex = Math.min(empSelectedIndex+1, items.length-1); }
+  else if (e.key === 'ArrowUp') { empSelectedIndex = Math.max(empSelectedIndex-1, 0); }
+  else if (e.key === 'Enter') {
+    if (empSelectedIndex >= 0) items[empSelectedIndex].click();
+    else empConfirm();
+    return;
+  } else return;
+  items.forEach((el,i) => el.style.background = i===empSelectedIndex ? '#ebf4ff' : '');
+  e.preventDefault();
+}
+
+function empShowResult(name) {
   const dates = getWeekDates();
   const ti = todayIndex();
-
   const rows = dates.map((d, i) => {
-    const myShifts = scheduleData.shifts.filter(s => s.day === i && s.name.toLowerCase().includes(q));
+    const myShifts = scheduleData.shifts.filter(s => s.day === i && s.name === name);
     const isToday = i === ti;
     const cls = myShifts.length ? (isToday ? 'emp-day today-emp' : 'emp-day has-shift') : 'emp-day no-shift';
     return `<div class="${cls}">
       <span class="eday">${DAYS_HE[i]} ${formatDate(d)}</span>
       ${myShifts.length
-        ? myShifts.map(s => `<span class="eshift">${s.role}${s.time ? ' · ' + s.time : ''}</span>`).join(' | ')
+        ? myShifts.map(s => `<span class="eshift">${s.role}${s.time ? ' · '+s.time : ''}</span>`).join(' | ')
         : '<span class="eoff">חופש / לא בסידור</span>'
       }
     </div>`;
   }).join('');
-
-  res.innerHTML = `
+  document.getElementById('empResult').innerHTML = `
     <div class="emp-result">
-      <div class="emp-header">סידור שבועי — "${document.getElementById('empSearch').value.trim()}"</div>
+      <div class="emp-header">סידור שבועי — ${name}</div>
       <div class="emp-week">${rows}</div>
     </div>`;
 }
+
+// close dropdown on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#tab-employee')) {
+    document.getElementById('empDropdown').style.display = 'none';
+  }
+});
 
 // ---- ADMIN LOGIN ----
 function adminLogin() {

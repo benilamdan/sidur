@@ -540,6 +540,10 @@
       <div class="today-header" id="todayTitle">משמרות היום</div>
       <div class="shift-list" id="todayList"></div>
     </div>
+    <div class="today-card" style="margin-top:16px">
+      <div class="today-header" id="tomorrowTitle" style="background:linear-gradient(135deg,#6b46c1,#553c9a)">משמרות מחר</div>
+      <div class="shift-list" id="tomorrowList"></div>
+    </div>
   </div>
 
   <!-- WEEK TAB -->
@@ -1895,6 +1899,30 @@ function renderToday() {
     html += `<div class="group-label" style="margin-top:14px">🌙 ערב</div>${shiftCards(evening)}`;
   }
   list.innerHTML = html;
+
+  // ---- TOMORROW ----
+  const tList = document.getElementById('tomorrowList');
+  const tTitle = document.getElementById('tomorrowTitle');
+  const tom = (ti + 1) % 7;
+  const tomDate = dates[tom] || null;
+
+  if (ti === 6 || !tomDate) {
+    tTitle.textContent = 'משמרות מחר';
+    tList.innerHTML = '<div class="no-data">מחר מחוץ לשבוע זה</div>';
+  } else {
+    tTitle.textContent = `משמרות מחר — ${DAYS_HE[tom]}, ${formatDate(tomDate)}`;
+    const tShifts = scheduleData.shifts.filter(s => s.day === tom);
+    if (!tShifts.length) {
+      tList.innerHTML = '<div class="no-data">אין משמרות מוגדרות למחר</div>';
+    } else {
+      const tm = tShifts.filter(s => !s.role.startsWith('ע'));
+      const te = tShifts.filter(s => s.role.startsWith('ע'));
+      let th = '';
+      if (tm.length) th += `<div class="group-label">☀️ בוקר / לילה</div>${shiftCards(tm)}`;
+      if (te.length) th += `<div class="group-label" style="margin-top:14px">🌙 ערב</div>${shiftCards(te)}`;
+      tList.innerHTML = th;
+    }
+  }
 }
 
 // ---- WEEK ----

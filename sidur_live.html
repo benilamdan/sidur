@@ -6,23 +6,28 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#2b6cb0">
-<title>סידור עבודה</title>
+<meta name="theme-color" content="#1a3a6b">
+<title>משמרות טקסטיל | וולפסון</title>
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22%D7%9E%D7%A9%D7%9E%D7%A8%D7%95%D7%AA%20%D7%98%D7%A7%D7%A1%D7%98%D7%99%D7%9C%22%2C%22short_name%22%3A%22%D7%98%D7%A7%D7%A1%D7%98%D7%99%D7%9C%22%2C%22start_url%22%3A%22.%2Fsidur_live.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a3a6b%22%2C%22theme_color%22%3A%22%231a3a6b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz48cmVjdCB3aWR0aD0nMjAwJyBoZWlnaHQ9JzIwMCcgZmlsbD0nIzFhM2E2YicvPjxyZWN0IHg9JzEwJyB5PScxMCcgd2lkdGg9JzgwJyBoZWlnaHQ9JzgwJyBmaWxsPScjMjE0N2E4Jy8%2BPHBvbHlnb24gcG9pbnRzPScxMTAsMTAgMTkwLDEwIDE5MCw5MCcgZmlsbD0nI2Y1YzIwMCcvPjxjaXJjbGUgY3g9JzUwJyBjeT0nMTUwJyByPSc0MCcgZmlsbD0nI2QzMjAyMCcvPjxnPjxsaW5lIHgxPScxMTAnIHkxPScxMTAnIHgyPScxOTAnIHkyPScxMTAnIHN0cm9rZT0nIzFlN2UzNCcgc3Ryb2tlLXdpZHRoPScxMicvPjxsaW5lIHgxPScxMTAnIHkxPScxMzAnIHgyPScxOTAnIHkyPScxMzAnIHN0cm9rZT0nIzFlN2UzNCcgc3Ryb2tlLXdpZHRoPScxMicvPjxsaW5lIHgxPScxMTAnIHkxPScxNTAnIHgyPScxOTAnIHkyPScxNTAnIHN0cm9rZT0nIzFlN2UzNCcgc3Ryb2tlLXdpZHRoPScxMicvPjxsaW5lIHgxPScxMTAnIHkxPScxNzAnIHgyPScxOTAnIHkyPScxNzAnIHN0cm9rZT0nIzFlN2UzNCcgc3Ryb2tlLXdpZHRoPScxMicvPjwvZz48L3N2Zz4%3D%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
 
   header {
-    background: linear-gradient(135deg, #2b6cb0, #2c5282);
+    background: linear-gradient(135deg, #1a3a6b, #0d2247);
     color: white;
-    padding: 18px 24px;
+    padding: 12px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
   }
-  header h1 { font-size: 1.5rem; }
-  header .week-label { font-size: 0.9rem; opacity: 0.85; }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .wolfson-logo { width: 48px; height: 48px; flex-shrink: 0; }
+  .header-titles { display: flex; flex-direction: column; gap: 1px; }
+  header h1 { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+  header .subtitle { font-size: 0.75rem; opacity: 0.75; letter-spacing: 0.02em; }
+  header .week-label { font-size: 0.82rem; opacity: 0.85; text-align: left; }
 
   .tabs {
     display: flex;
@@ -462,9 +467,40 @@
 <body>
 
 <header>
-  <h1>📋 סידור עבודה</h1>
+  <div class="header-left">
+    <svg class="wolfson-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="44" fill="#2147a8"/>
+      <polygon points="54,2 98,2 98,46" fill="#f5c200"/>
+      <circle cx="24" cy="76" r="22" fill="#d32020"/>
+      <line x1="54" y1="56" x2="98" y2="56" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="68" x2="98" y2="68" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="80" x2="98" y2="80" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="92" x2="98" y2="92" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <div class="header-titles">
+      <h1>משמרות טקסטיל</h1>
+      <span class="subtitle">המרכז הרפואי ע"ש אדית וולפסון</span>
+    </div>
+  </div>
   <span class="week-label" id="headerWeek"></span>
 </header>
+
+<!-- Install banner -->
+<div id="installBtn" style="display:none;background:#f0f7ff;border-bottom:1px solid #bee3f8;padding:10px 16px;align-items:center;gap:10px;justify-content:space-between">
+  <div style="display:flex;align-items:center;gap:10px">
+    <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="44" fill="#2147a8"/>
+      <polygon points="54,2 98,2 98,46" fill="#f5c200"/>
+      <circle cx="24" cy="76" r="22" fill="#d32020"/>
+      <line x1="54" y1="56" x2="98" y2="56" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="68" x2="98" y2="68" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="80" x2="98" y2="80" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="92" x2="98" y2="92" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <span style="font-size:0.9rem;color:#1a3a6b;font-weight:600">הוסף למסך הבית</span>
+  </div>
+  <button onclick="installApp()" style="background:#1a3a6b;color:white;border:none;border-radius:8px;padding:8px 18px;font-size:0.9rem;font-family:inherit;cursor:pointer">התקן</button>
+</div>
 
 <!-- Desktop tabs -->
 <div class="tabs">
@@ -1781,6 +1817,26 @@ function showTab(name) {
   if (name === 'today') renderToday();
   if (name === 'week') renderWeek();
   if (name === 'admin' && adminLoggedIn) renderAdminTable();
+}
+
+// ---- PWA INSTALL ----
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'flex';
+});
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'none';
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+  }
 }
 
 // ---- HEADER ----

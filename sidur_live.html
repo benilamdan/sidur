@@ -2054,7 +2054,7 @@ function renderAdminTable() {
       <td><input value="${s.role}" onchange="updateShift(${idx},'role',this.value)"></td>
       <td><input value="${s.name}" onchange="updateShift(${idx},'name',this.value)"></td>
       <td><input value="${s.time||''}" onchange="updateShift(${idx},'time',this.value)"></td>
-      <td><button class="del-btn" onclick="deleteShift(${idx})">🗑</button></td>
+      <td><button class="del-btn" onclick="deleteShift(${idx},this)">🗑</button></td>
     </tr>`;
   }).join('');
 
@@ -2090,7 +2090,7 @@ function renderAdminTable() {
           <input value="${s.time||''}" placeholder="07:00-15:00" onchange="updateShift(${idx},'time',this.value)">
         </div>
         <div class="card-actions">
-          <button class="btn btn-red" onclick="deleteShift(${idx})">מחק 🗑</button>
+          <button class="btn btn-red" onclick="deleteShift(${idx},this)">מחק 🗑</button>
         </div>
       </div>`;
   }).join('');
@@ -2113,8 +2113,14 @@ function updateShift(idx, field, val) {
   else scheduleData.shifts[idx][field] = val;
 }
 
-function deleteShift(idx) {
-  if (!confirm('למחוק משמרת זו?')) return;
+function deleteShift(idx, btn) {
+  if (!btn._confirmPending) {
+    btn._confirmPending = true;
+    btn.textContent = 'בטוח? לחץ שוב';
+    btn.style.background = '#c53030';
+    setTimeout(() => { btn._confirmPending = false; btn.textContent = 'מחק 🗑'; btn.style.background = ''; }, 3000);
+    return;
+  }
   scheduleData.shifts.splice(idx, 1);
   renderAdminTable();
 }

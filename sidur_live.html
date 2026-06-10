@@ -577,47 +577,56 @@
         <span>🔄 נטענו שינויים שלא פורסמו (נשמרו אוטומטית במכשיר זה)</span>
         <button class="btn btn-gray" onclick="discardDraft()">התעלם ושחזר מקורי</button>
       </div>
-      <div class="week-selector">
-        <label>שבוע:</label>
-        <input type="date" id="weekStart" onchange="changeWeek()">
-        <button class="btn btn-gray" onclick="prevWeek()">◀ שבוע קודם</button>
-        <button class="btn btn-gray" onclick="nextWeek()">שבוע הבא ▶</button>
+      <!-- SWAP SECTION (today/tomorrow) -->
+      <div id="swapSection"></div>
+
+      <div style="margin:16px 0">
+        <button class="btn btn-gray" id="moreDaysBtn" style="width:100%;padding:12px" onclick="toggleMoreDays()">📅 ערוך ימים נוספים / הוספה / מחיקה</button>
       </div>
 
-      <div class="admin-toolbar">
-        <select id="newDay">
-          <option value="0">ראשון</option>
-          <option value="1">שני</option>
-          <option value="2">שלישי</option>
-          <option value="3">רביעי</option>
-          <option value="4">חמישי</option>
-          <option value="5">שישי</option>
-          <option value="6">שבת</option>
-        </select>
-        <input type="text" id="newRole" placeholder="תפקיד / משמרת">
-        <input type="text" id="newName" placeholder="שם עובד">
-        <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
-        <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
-      </div>
+      <div id="moreDaysSection" class="hidden">
+        <div class="week-selector">
+          <label>שבוע:</label>
+          <input type="date" id="weekStart" onchange="changeWeek()">
+          <button class="btn btn-gray" onclick="prevWeek()">◀ שבוע קודם</button>
+          <button class="btn btn-gray" onclick="nextWeek()">שבוע הבא ▶</button>
+        </div>
 
-      <!-- DESKTOP TABLE -->
-      <div class="schedule-table">
-        <table>
-          <thead>
-            <tr>
-              <th>יום</th>
-              <th>תפקיד / משמרת</th>
-              <th>עובד</th>
-              <th>הערה / החלפה</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="adminTable"></tbody>
-        </table>
-      </div>
+        <div class="admin-toolbar">
+          <select id="newDay">
+            <option value="0">ראשון</option>
+            <option value="1">שני</option>
+            <option value="2">שלישי</option>
+            <option value="3">רביעי</option>
+            <option value="4">חמישי</option>
+            <option value="5">שישי</option>
+            <option value="6">שבת</option>
+          </select>
+          <input type="text" id="newRole" placeholder="תפקיד / משמרת">
+          <input type="text" id="newName" placeholder="שם עובד">
+          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
+          <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
+        </div>
 
-      <!-- MOBILE CARDS -->
-      <div id="mobileCards"></div>
+        <!-- DESKTOP TABLE -->
+        <div class="schedule-table">
+          <table>
+            <thead>
+              <tr>
+                <th>יום</th>
+                <th>תפקיד / משמרת</th>
+                <th>עובד</th>
+                <th>הערה / החלפה</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="adminTable"></tbody>
+          </table>
+        </div>
+
+        <!-- MOBILE CARDS -->
+        <div id="mobileCards"></div>
+      </div>
 
       <div class="save-bar">
         <div id="githubSection" style="width:100%">
@@ -2112,8 +2121,52 @@ function adminLogout() {
   document.getElementById('adminErr').classList.add('hidden');
 }
 
+// ---- SWAP SECTION (today/tomorrow) ----
+function toggleMoreDays() {
+  const sec = document.getElementById('moreDaysSection');
+  const btn = document.getElementById('moreDaysBtn');
+  const show = sec.classList.contains('hidden');
+  sec.classList.toggle('hidden');
+  btn.textContent = show ? '📅 הסתר ימים נוספים' : '📅 ערוך ימים נוספים / הוספה / מחיקה';
+}
+
+function renderSwapSection() {
+  const sec = document.getElementById('swapSection');
+  const dates = getWeekDates();
+  const ti = todayIndex();
+
+  if (ti === -1) {
+    sec.innerHTML = `<div class="no-data" style="padding:16px">השבוע הנבחר אינו כולל את היום. לחץ על "ערוך ימים נוספים" כדי לבחור שבוע אחר.</div>`;
+    return;
+  }
+
+  function dayBlock(dayIdx, label) {
+    if (dayIdx < 0 || dayIdx > 6) {
+      return `<div class="shift-edit-card"><div class="card-day">${label}</div><div class="no-data" style="padding:10px 0">מחוץ לשבוע הנבחר — השתמש ב"ערוך ימים נוספים"</div></div>`;
+    }
+    const shifts = scheduleData.shifts.filter(s => s.day === dayIdx);
+    if (!shifts.length) {
+      return `<div class="shift-edit-card"><div class="card-day">${label} — ${DAYS_HE[dayIdx]}, ${formatDate(dates[dayIdx])}</div><div class="no-data" style="padding:10px 0">אין משמרות</div></div>`;
+    }
+    const rows = shifts.map(s => {
+      const idx = scheduleData.shifts.indexOf(s);
+      return `
+        <div class="field-row" style="border-bottom:1px solid #f0f0f0;padding-bottom:10px;margin-bottom:10px">
+          <label>${s.role}</label>
+          <input value="${s.name}" placeholder="שם עובד" onchange="updateShift(${idx},'name',this.value)">
+          <input value="${s.note||''}" placeholder="הערה / החלפה (לדוג' הוחלף עם דני)" onchange="updateShift(${idx},'note',this.value)" style="margin-top:6px">
+        </div>`;
+    }).join('');
+    return `<div class="shift-edit-card"><div class="card-day">${label} — ${DAYS_HE[dayIdx]}, ${formatDate(dates[dayIdx])}</div>${rows}</div>`;
+  }
+
+  const tom = ti === 6 ? -1 : (ti + 1) % 7;
+  sec.innerHTML = `<h2 style="margin-bottom:14px">🔄 החלפות — היום ומחר</h2>` + dayBlock(ti, 'היום') + dayBlock(tom, 'מחר');
+}
+
 // ---- ADMIN TABLE ----
 function renderAdminTable() {
+  renderSwapSection();
   const sorted = [...scheduleData.shifts].sort((a,b) => a.day - b.day || (a.role > b.role ? 1 : -1));
 
   // Desktop table

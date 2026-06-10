@@ -1887,8 +1887,9 @@ function renderToday() {
     return;
   }
 
-  const morning = shifts.filter(s => !s.role.startsWith('ע'));
+  const morning = shifts.filter(s => !s.role.startsWith('ע') && !s.role.startsWith('מ'));
   const evening = shifts.filter(s => s.role.startsWith('ע'));
+  const night = shifts.filter(s => s.role.startsWith('מ'));
 
   function shiftCards(arr) {
     return arr.map(s => `
@@ -1901,10 +1902,13 @@ function renderToday() {
 
   let html = '';
   if (morning.length) {
-    html += `<div class="group-label">☀️ בוקר / לילה</div>${shiftCards(morning)}`;
+    html += `<div class="group-label">☀️ בוקר</div>${shiftCards(morning)}`;
   }
   if (evening.length) {
-    html += `<div class="group-label" style="margin-top:14px">🌙 ערב</div>${shiftCards(evening)}`;
+    html += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(evening)}`;
+  }
+  if (night.length) {
+    html += `<div class="group-label" style="margin-top:14px">🌙 לילה</div>${shiftCards(night)}`;
   }
   list.innerHTML = html;
 
@@ -1923,11 +1927,13 @@ function renderToday() {
     if (!tShifts.length) {
       tList.innerHTML = '<div class="no-data">אין משמרות מוגדרות למחר</div>';
     } else {
-      const tm = tShifts.filter(s => !s.role.startsWith('ע'));
+      const tm = tShifts.filter(s => !s.role.startsWith('ע') && !s.role.startsWith('מ'));
       const te = tShifts.filter(s => s.role.startsWith('ע'));
+      const tn = tShifts.filter(s => s.role.startsWith('מ'));
       let th = '';
-      if (tm.length) th += `<div class="group-label">☀️ בוקר / לילה</div>${shiftCards(tm)}`;
-      if (te.length) th += `<div class="group-label" style="margin-top:14px">🌙 ערב</div>${shiftCards(te)}`;
+      if (tm.length) th += `<div class="group-label">☀️ בוקר</div>${shiftCards(tm)}`;
+      if (te.length) th += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(te)}`;
+      if (tn.length) th += `<div class="group-label" style="margin-top:14px">🌙 לילה</div>${shiftCards(tn)}`;
       tList.innerHTML = th;
     }
   }

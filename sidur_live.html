@@ -1887,9 +1887,10 @@ function renderToday() {
     return;
   }
 
-  const morning = shifts.filter(s => !s.role.startsWith('ע') && !s.role.startsWith('מ'));
+  const isShabbat = ti === 6;
+  const morning = shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && s.role.startsWith('מ')));
   const evening = shifts.filter(s => s.role.startsWith('ע'));
-  const night = shifts.filter(s => s.role.startsWith('מ'));
+  const night = isShabbat ? shifts.filter(s => s.role.startsWith('מ')) : [];
 
   function shiftCards(arr) {
     return arr.map(s => `
@@ -1927,9 +1928,10 @@ function renderToday() {
     if (!tShifts.length) {
       tList.innerHTML = '<div class="no-data">אין משמרות מוגדרות למחר</div>';
     } else {
-      const tm = tShifts.filter(s => !s.role.startsWith('ע') && !s.role.startsWith('מ'));
+      const tIsShabbat = tom === 6;
+      const tm = tShifts.filter(s => !s.role.startsWith('ע') && !(tIsShabbat && s.role.startsWith('מ')));
       const te = tShifts.filter(s => s.role.startsWith('ע'));
-      const tn = tShifts.filter(s => s.role.startsWith('מ'));
+      const tn = tIsShabbat ? tShifts.filter(s => s.role.startsWith('מ')) : [];
       let th = '';
       if (tm.length) th += `<div class="group-label">☀️ בוקר</div>${shiftCards(tm)}`;
       if (te.length) th += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(te)}`;

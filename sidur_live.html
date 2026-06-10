@@ -75,7 +75,7 @@
   }
   .shift-item .role { font-weight: 600; color: #2d3748; min-width: 140px; }
   .shift-item .name { color: #4a5568; }
-  .shift-item .time { margin-right: auto; color: #718096; font-size: 0.85rem; }
+  .shift-item .note { margin-right: auto; color: #dd6b20; font-size: 0.85rem; font-style: italic; }
   .no-data { color: #a0aec0; padding: 20px; text-align: center; font-style: italic; }
   .emp-suggest { padding: 12px 16px; cursor: pointer; font-size: 1rem; border-bottom: 1px solid #f0f0f0; }
   .emp-suggest:last-child { border-bottom: none; }
@@ -432,7 +432,7 @@
     header h1 { font-size: 1.25rem; }
 
     .shift-item { flex-wrap: wrap; gap: 4px; }
-    .shift-item .time { margin-right: 0; width: 100%; }
+    .shift-item .note { margin-right: 0; width: 100%; }
     .shift-item .role { min-width: unset; font-size: 1rem; }
     .shift-item .name { font-size: 1rem; }
     .shift-item { padding: 14px 16px; }
@@ -573,6 +573,10 @@
       <div class="err hidden" id="adminErr">סיסמה שגויה</div>
     </div>
     <div id="adminPanel" class="admin-panel hidden">
+      <div id="draftNotice" class="hidden" style="background:#fffaf0;border:2px solid #f6ad55;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:0.9rem;color:#9c4221;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <span>🔄 נטענו שינויים שלא פורסמו (נשמרו אוטומטית במכשיר זה)</span>
+        <button class="btn btn-gray" onclick="discardDraft()">התעלם ושחזר מקורי</button>
+      </div>
       <div class="week-selector">
         <label>שבוע:</label>
         <input type="date" id="weekStart" onchange="changeWeek()">
@@ -592,7 +596,7 @@
         </select>
         <input type="text" id="newRole" placeholder="תפקיד / משמרת">
         <input type="text" id="newName" placeholder="שם עובד">
-        <input type="text" id="newTime" placeholder="שעות (לדוג' 07:00-15:00)">
+        <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
         <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
       </div>
 
@@ -604,7 +608,7 @@
               <th>יום</th>
               <th>תפקיד / משמרת</th>
               <th>עובד</th>
-              <th>שעות</th>
+              <th>הערה / החלפה</th>
               <th></th>
             </tr>
           </thead>
@@ -637,6 +641,10 @@
 </div>
 
 <script>
+// snapshot of the original page source, captured before any DOM mutation —
+// used as the basis for publish/download so admin UI state never leaks into the saved file
+const PRISTINE_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
 // ============================================================
 // DATA — עדכן כאן את הסידור (או השתמש במצב מנהל)
 // ============================================================
@@ -650,1129 +658,1129 @@ let scheduleData = {
       "day": 0,
       "role": "ב-מ/פ",
       "name": "דני וודגה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "דני וודגה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב-מ/פ",
       "name": "דני וודגה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב-מ/פ",
       "name": "דני וודגה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "פרסונל20:00",
       "name": "דני וודגה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "פנטה טגאיא",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב-פ",
       "name": "פנטה טגאיא",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב-מ/פ",
       "name": "פנטה טגאיא",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב-05:00",
       "name": "פנטה טגאיא",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "פנטה טגאיא",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב-מ/פ",
       "name": "גושה סמין",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב-05:00",
       "name": "גושה סמין",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "גושה סמין",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב-מ/פ",
       "name": "גושה סמין",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "גושה סמין",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "א",
       "name": "צגה גוביה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "א",
       "name": "צגה גוביה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "א",
       "name": "צגה גוביה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "א",
       "name": "צגה גוביה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "א",
       "name": "צגה גוביה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב-05:00",
       "name": "קסה אספאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "קסה אספאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב-05:00",
       "name": "קסה אספאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "קסה אספאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב-05:00",
       "name": "קסה אספאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "א",
       "name": "בלאצ'או הבטאם",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "עא",
       "name": "בלאצ'או הבטאם",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "עא",
       "name": "בלאצ'או הבטאם",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "בלאצ'או הבטאם",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "מכונות20:00",
       "name": "בלאצ'או הבטאם",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב-עגלות",
       "name": "גולה אמבסאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "גולה אמבסאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "גולה אמבסאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "גולה אמבסאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "גולה אמבסאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ש.עגלות",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ש.עגלות",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "מחסן22:00",
       "name": "יהונה גוואדי",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב-ייבוש",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ש.עגלות",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ש.עגלות",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "עא",
       "name": "משה צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע-אחראי",
       "name": "אבי אסממאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע",
       "name": "אבי אסממאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "עמ",
       "name": "אבי אסממאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע-אחראי",
       "name": "אבי אסממאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ע/עמ",
       "name": "אבי אסממאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ש.עגלות",
       "name": "דמל קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "דמל קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "עא",
       "name": "דמל קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "א",
       "name": "דמל קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "דמל קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "רפאל יחנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "רפאל יחנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "רפאל יחנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "רפאל יחנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "רפאל יחנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "עא",
       "name": "טספיי אצנפה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "עא",
       "name": "טספיי אצנפה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "עא",
       "name": "טספיי אצנפה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "עא",
       "name": "טספיי אצנפה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "עא",
       "name": "טספיי אצנפה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "מ",
       "name": "מוקטו גרמאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב-ייבוש",
       "name": "מוקטו גרמאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "מ",
       "name": "מוקטו גרמאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב-ייבוש",
       "name": "מוקטו גרמאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "מחסן22:00",
       "name": "מוקטו גרמאו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע",
       "name": "מלאק אבבה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע",
       "name": "מלאק אבבה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע-פ",
       "name": "מלאק אבבה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע",
       "name": "מלאק אבבה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "מחסן/גיהוץ20:00",
       "name": "מלאק אבבה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע",
       "name": "גטא'צ'או אסאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע",
       "name": "גטא'צ'או אסאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע-פ",
       "name": "גטא'צ'או אסאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע",
       "name": "גטא'צ'או אסאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "עא",
       "name": "גטא'צ'או אסאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "אברראו צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "אברראו צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "אברראו צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "אברראו צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב",
       "name": "אברראו צקול",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע",
       "name": "קאסאו האילה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "עמ",
       "name": "קאסאו האילה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "עמ",
       "name": "קאסאו האילה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ע-ייבוש",
       "name": "קאסאו האילה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "א",
       "name": "קאסאו האילה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע-אחראי",
       "name": "אדמה וודנך",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע",
       "name": "אדמה וודנך",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע-אחראי",
       "name": "אדמה וודנך",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע-פ",
       "name": "אדמה וודנך",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "ב",
       "name": "אדמה וודנך",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "עמי טשאלה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "עמי טשאלה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "עמי טשאלה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "עמי טשאלה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "עמי טשאלה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע-פ",
       "name": "וודו אספה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע",
       "name": "וודו אספה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע-ייבוש",
       "name": "וודו אספה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "א",
       "name": "וודו אספה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "עא",
       "name": "וודו אספה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "מ",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ש.עגלות",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב-ווילונות",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "מחסן22:00",
       "name": "בריהון אייאיו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "עמ",
       "name": "אילה אונקאהונה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "אילה אונקאהונה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב-ייבוש",
       "name": "אילה אונקאהונה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב-ייבוש",
       "name": "אילה אונקאהונה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "מ",
       "name": "אילה אונקאהונה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "עא",
       "name": "מולה קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע",
       "name": "מולה קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע-ייבוש",
       "name": "מולה קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע",
       "name": "מולה קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "ייבוש20:00",
       "name": "מולה קאסה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "עא",
       "name": "אדנה בזה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "מ",
       "name": "אדנה בזה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע",
       "name": "אדנה בזה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "א",
       "name": "אדנה בזה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "א",
       "name": "אדנה בזה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "א",
       "name": "רפאלוב דוד",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "א",
       "name": "רפאלוב דוד",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "א",
       "name": "רפאלוב דוד",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "א",
       "name": "רפאלוב דוד",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "עא",
       "name": "רפאלוב דוד",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע-פ",
       "name": "אלמו ביקאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע-ייבוש",
       "name": "אלמו ביקאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע-אחראי",
       "name": "אלמו ביקאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע",
       "name": "אלמו ביקאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "ע",
       "name": "אלמו ביקאייה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "א",
       "name": "שימונוב ניסן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "א",
       "name": "שימונוב ניסן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "א",
       "name": "שימונוב ניסן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "א",
       "name": "שימונוב ניסן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "א",
       "name": "שימונוב ניסן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "אמארה סטארגו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "אמארה סטארגו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "אמארה סטארגו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "אמארה סטארגו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "אמארה סטארגו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע-ייבוש",
       "name": "מברטו ברהנו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "עמ",
       "name": "מברטו ברהנו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע-ייבוש",
       "name": "מברטו ברהנו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "מ",
       "name": "מברטו ברהנו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 5,
       "role": "ב-ייבוש",
       "name": "מברטו ברהנו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "חיים כהן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "חיים כהן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "חיים כהן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "חיים כהן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "חיים כהן",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "בתיה אלמיהו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "בתיה אלמיהו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "בתיה אלמיהו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "בתיה אלמיהו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 6,
       "role": "פרסונל20:00",
       "name": "בתיה אלמיהו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "טקלה פקדו טזרה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "טקלה פקדו טזרה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "טקלה פקדו טזרה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "טקלה פקדו טזרה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "טקלה פקדו טזרה",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ע",
       "name": "אמה אראנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ע",
       "name": "אמה אראנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ע",
       "name": "אמה אראנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ע",
       "name": "אמה אראנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ע",
       "name": "אמה אראנוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "לריסה גולקרוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "לריסה גולקרוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "לריסה גולקרוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "לריסה גולקרוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "לריסה גולקרוב",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "יפה קוניו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "יפה קוניו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "יפה קוניו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "יפה קוניו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "יפה קוניו",
-      "time": ""
+      "note": ""
     },
     {
       "day": 0,
       "role": "ב",
       "name": "גלית עזר אוזר",
-      "time": ""
+      "note": ""
     },
     {
       "day": 1,
       "role": "ב",
       "name": "גלית עזר אוזר",
-      "time": ""
+      "note": ""
     },
     {
       "day": 2,
       "role": "ב",
       "name": "גלית עזר אוזר",
-      "time": ""
+      "note": ""
     },
     {
       "day": 3,
       "role": "ב",
       "name": "גלית עזר אוזר",
-      "time": ""
+      "note": ""
     },
     {
       "day": 4,
       "role": "ב",
       "name": "גלית עזר אוזר",
-      "time": ""
+      "note": ""
     }
   ]
 };
@@ -1887,7 +1895,7 @@ function renderToday() {
       <div class="shift-item">
         <span class="role">${s.role}</span>
         <span class="name">${s.name}</span>
-        <span class="time">${s.time || ''}</span>
+        ${s.note ? `<span class="note">🔄 ${s.note}</span>` : ''}
       </div>`).join('');
   }
 
@@ -1943,7 +1951,7 @@ function renderWeek() {
           ${shifts.length ? shifts.map(s => `
             <div class="day-shift">
               <span class="dr">${s.role}</span>
-              <span class="dn">${s.name}${s.time ? ' · ' + s.time : ''}</span>
+              <span class="dn">${s.name}${s.note ? ' · 🔄 ' + s.note : ''}</span>
             </div>
           `).join('') : '<div class="no-data" style="padding:8px 0;font-size:0.85rem">אין משמרות</div>'}
         </div>
@@ -2024,7 +2032,7 @@ function empShowResult(name) {
     return `<div class="${cls}">
       <span class="eday">${DAYS_HE[i]} ${formatDate(d)}</span>
       ${myShifts.length
-        ? myShifts.map(s => `<span class="eshift">${s.role}${s.time ? ' · '+s.time : ''}</span>`).join(' | ')
+        ? myShifts.map(s => `<span class="eshift">${s.role}${s.note ? ' · 🔄 '+s.note : ''}</span>`).join(' | ')
         : '<span class="eoff">חופש / לא בסידור</span>'
       }
     </div>`;
@@ -2050,12 +2058,43 @@ function adminLogin() {
     adminLoggedIn = true;
     document.getElementById('adminLogin').classList.add('hidden');
     document.getElementById('adminPanel').classList.remove('hidden');
+    loadDraft();
     document.getElementById('weekStart').value = scheduleData.weekStart;
     initTokenUI();
     renderAdminTable();
   } else {
     document.getElementById('adminErr').classList.remove('hidden');
   }
+}
+
+// ---- DRAFT (auto-save unpublished edits to this device) ----
+const DRAFT_KEY = 'sidur_draft';
+
+function saveDraft() {
+  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(scheduleData)); } catch (e) {}
+}
+
+function loadDraft() {
+  let draft = null;
+  try { draft = localStorage.getItem(DRAFT_KEY); } catch (e) {}
+  if (!draft) return;
+  try {
+    const parsed = JSON.parse(draft);
+    if (JSON.stringify(parsed) !== JSON.stringify(scheduleData)) {
+      scheduleData = parsed;
+      document.getElementById('draftNotice').classList.remove('hidden');
+    }
+  } catch (e) {}
+}
+
+function discardDraft() {
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  location.reload();
+}
+
+function clearDraft() {
+  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
+  document.getElementById('draftNotice').classList.add('hidden');
 }
 function adminLogout() {
   adminLoggedIn = false;
@@ -2081,7 +2120,7 @@ function renderAdminTable() {
       </td>
       <td><input value="${s.role}" onchange="updateShift(${idx},'role',this.value)"></td>
       <td><input value="${s.name}" onchange="updateShift(${idx},'name',this.value)"></td>
-      <td><input value="${s.time||''}" onchange="updateShift(${idx},'time',this.value)"></td>
+      <td><input value="${s.note||''}" placeholder="לדוג' החלפה עם דני" onchange="updateShift(${idx},'note',this.value)"></td>
       <td><button class="del-btn" onclick="deleteShift(${idx},this)">🗑</button></td>
     </tr>`;
   }).join('');
@@ -2099,7 +2138,7 @@ function renderAdminTable() {
       </div>
       <div class="field-row"><label>משמרת / תפקיד</label><input id="m_newRole" placeholder="בוקר / ערב..."></div>
       <div class="field-row"><label>שם עובד</label><input id="m_newName" placeholder="שם מלא"></div>
-      <div class="field-row"><label>שעות</label><input id="m_newTime" placeholder="07:00-15:00"></div>
+      <div class="field-row"><label>הערה / החלפה (לא חובה)</label><input id="m_newNote" placeholder="לדוג' החלפה עם דני"></div>
       <button class="btn btn-blue" style="width:100%;padding:12px;font-size:1rem;" onclick="mobileAddShift()">הוסף</button>
     </div>`;
 
@@ -2114,8 +2153,8 @@ function renderAdminTable() {
         <div class="field-row"><label>עובד</label>
           <input value="${s.name}" onchange="updateShift(${idx},'name',this.value)">
         </div>
-        <div class="field-row"><label>שעות</label>
-          <input value="${s.time||''}" placeholder="07:00-15:00" onchange="updateShift(${idx},'time',this.value)">
+        <div class="field-row"><label>הערה / החלפה</label>
+          <input value="${s.note||''}" placeholder="לדוג' החלפה עם דני" onchange="updateShift(${idx},'note',this.value)">
         </div>
         <div class="card-actions">
           <button class="btn btn-red" onclick="deleteShift(${idx},this)">מחק 🗑</button>
@@ -2130,15 +2169,17 @@ function mobileAddShift() {
   const day = parseInt(document.getElementById('m_newDay').value);
   const role = document.getElementById('m_newRole').value.trim();
   const name = document.getElementById('m_newName').value.trim();
-  const time = document.getElementById('m_newTime').value.trim();
+  const note = document.getElementById('m_newNote').value.trim();
   if (!role || !name) { alert('נא למלא משמרת ושם'); return; }
-  scheduleData.shifts.push({ day, role, name, time });
+  scheduleData.shifts.push({ day, role, name, note });
+  saveDraft();
   renderAdminTable();
 }
 
 function updateShift(idx, field, val) {
   if (field === 'day') scheduleData.shifts[idx].day = parseInt(val);
   else scheduleData.shifts[idx][field] = val;
+  saveDraft();
 }
 
 function deleteShift(idx, btn) {
@@ -2150,6 +2191,7 @@ function deleteShift(idx, btn) {
     return;
   }
   scheduleData.shifts.splice(idx, 1);
+  saveDraft();
   renderAdminTable();
 }
 
@@ -2157,12 +2199,13 @@ function addShift() {
   const day = parseInt(document.getElementById('newDay').value);
   const role = document.getElementById('newRole').value.trim();
   const name = document.getElementById('newName').value.trim();
-  const time = document.getElementById('newTime').value.trim();
+  const note = document.getElementById('newNote').value.trim();
   if (!role || !name) { alert('נא למלא תפקיד ושם'); return; }
-  scheduleData.shifts.push({ day, role, name, time });
+  scheduleData.shifts.push({ day, role, name, note });
   document.getElementById('newRole').value = '';
   document.getElementById('newName').value = '';
-  document.getElementById('newTime').value = '';
+  document.getElementById('newNote').value = '';
+  saveDraft();
   renderAdminTable();
 }
 
@@ -2170,6 +2213,7 @@ function addShift() {
 function changeWeek() {
   scheduleData.weekStart = document.getElementById('weekStart').value;
   updateHeader();
+  saveDraft();
   if (currentTab !== 'admin') showTab(currentTab);
   else { renderAdminTable(); }
 }
@@ -2180,6 +2224,7 @@ function prevWeek() {
   scheduleData.weekStart = d.toISOString().slice(0,10);
   document.getElementById('weekStart').value = scheduleData.weekStart;
   updateHeader();
+  saveDraft();
   renderAdminTable();
 }
 
@@ -2189,6 +2234,7 @@ function nextWeek() {
   scheduleData.weekStart = d.toISOString().slice(0,10);
   document.getElementById('weekStart').value = scheduleData.weekStart;
   updateHeader();
+  saveDraft();
   renderAdminTable();
 }
 
@@ -2198,21 +2244,22 @@ const GH_FILE = 'sidur_live.html';
 
 function saveToken() {
   const t = document.getElementById('ghToken').value.trim();
-  if (!t.startsWith('ghp_')) { alert('טוקן לא תקין — חייב להתחיל ב-ghp_'); return; }
-  sessionStorage.setItem('ghToken', t);
+  if (!t.startsWith('ghp_') && !t.startsWith('github_pat_')) { alert('טוקן לא תקין — חייב להתחיל ב-ghp_ או github_pat_'); return; }
+  try { localStorage.setItem('ghToken', t); } catch (e) { alert('לא ניתן לשמור Token במכשיר זה: ' + e.message); return; }
   document.getElementById('tokenSetup').style.display = 'none';
   document.getElementById('publishBar').style.display = 'flex';
 }
 
 function clearToken() {
-  sessionStorage.removeItem('ghToken');
+  try { localStorage.removeItem('ghToken'); } catch (e) {}
   document.getElementById('ghToken').value = '';
   document.getElementById('tokenSetup').style.display = 'flex';
   document.getElementById('publishBar').style.display = 'none';
 }
 
 function initTokenUI() {
-  const t = sessionStorage.getItem('ghToken');
+  let t = null;
+  try { t = localStorage.getItem('ghToken'); } catch (e) {}
   if (t) {
     document.getElementById('tokenSetup').style.display = 'none';
     document.getElementById('publishBar').style.display = 'flex';
@@ -2220,7 +2267,8 @@ function initTokenUI() {
 }
 
 async function publishToGitHub() {
-  const token = sessionStorage.getItem('ghToken');
+  let token = null;
+  try { token = localStorage.getItem('ghToken'); } catch (e) {}
   if (!token) { clearToken(); return; }
 
   const status = document.getElementById('publishStatus');
@@ -2234,13 +2282,17 @@ async function publishToGitHub() {
     const infoRes = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
       headers: { Authorization: `token ${token}`, 'User-Agent': 'sidur-app' }
     });
+    if (!infoRes.ok) {
+      const err = await infoRes.json().catch(() => ({}));
+      throw new Error(`לא ניתן לקרוא את הקובץ מ-GitHub (${infoRes.status}): ${err.message || infoRes.statusText}`);
+    }
     const info = await infoRes.json();
     const sha = info.sha;
 
-    // Build updated HTML
-    const html = document.documentElement.outerHTML;
+    // Build updated HTML from the pristine source (so admin UI state never leaks in)
     const dataStr = JSON.stringify(scheduleData, null, 2);
-    const updated = html.replace(/let scheduleData = \{[\s\S]*?\n\};/, 'let scheduleData = ' + dataStr + ';');
+    const updated = PRISTINE_HTML.replace(/let scheduleData = \{[\s\S]*?\n\};/, 'let scheduleData = ' + dataStr + ';');
+    if (updated === PRISTINE_HTML) throw new Error('עדכון הנתונים נכשל (תבנית לא נמצאה) — פנה לתמיכה');
     const encoded = btoa(unescape(encodeURIComponent(updated)));
 
     // Push to GitHub
@@ -2254,23 +2306,27 @@ async function publishToGitHub() {
       status.style.background = '#f0fff4';
       status.style.color = '#276749';
       status.textContent = '✅ עודכן בהצלחה! כל העובדים רואים את השינוי תוך דקה.';
+      clearDraft();
     } else {
-      const err = await pushRes.json();
-      throw new Error(err.message);
+      const err = await pushRes.json().catch(() => ({}));
+      throw new Error(`שגיאה (${pushRes.status}): ${err.message || pushRes.statusText}`);
     }
   } catch (e) {
     status.style.background = '#fff5f5';
     status.style.color = '#c53030';
-    status.textContent = '❌ שגיאה: ' + e.message;
+    if (e instanceof TypeError) {
+      status.textContent = '❌ בעיית תקשורת — בדוק חיבור אינטרנט ונסה שוב. (' + e.message + ')';
+    } else {
+      status.textContent = '❌ שגיאה: ' + e.message;
+    }
   }
 }
 
 // ---- DOWNLOAD UPDATED HTML ----
 function downloadHTML() {
-  const html = document.documentElement.outerHTML;
-  // inject updated data
+  // inject updated data into the pristine source (so admin UI state never leaks in)
   const dataStr = JSON.stringify(scheduleData, null, 2);
-  const updated = html.replace(
+  const updated = PRISTINE_HTML.replace(
     /let scheduleData = \{[\s\S]*?\n\};/,
     'let scheduleData = ' + dataStr + ';'
   );

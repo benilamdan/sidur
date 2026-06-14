@@ -603,10 +603,6 @@
       <div class="err hidden" id="adminErr">סיסמה שגויה</div>
     </div>
     <div id="adminPanel" class="admin-panel hidden">
-      <div id="draftNotice" class="hidden" style="background:#fffaf0;border:2px solid #f6ad55;border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:0.9rem;color:#9c4221;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
-        <span>🔄 נטענו שינויים שלא פורסמו (נשמרו אוטומטית במכשיר זה)</span>
-        <button class="btn btn-gray" onclick="discardDraft()">התעלם ושחזר מקורי</button>
-      </div>
       <!-- SWAP SECTION (today/tomorrow) -->
       <div id="swapSection"></div>
 
@@ -2035,7 +2031,6 @@ function adminLogin() {
     adminLoggedIn = true;
     document.getElementById('adminLogin').classList.add('hidden');
     document.getElementById('adminPanel').classList.remove('hidden');
-    loadDraft();
     document.getElementById('weekStart').value = scheduleData.weekStart;
     renderAdminTable();
   } else {
@@ -2043,35 +2038,7 @@ function adminLogin() {
   }
 }
 
-// ---- DRAFT (auto-save unpublished edits to this device) ----
-const DRAFT_KEY = 'sidur_draft';
-
-function saveDraft() {
-  try { localStorage.setItem(DRAFT_KEY, JSON.stringify(scheduleData)); } catch (e) {}
-}
-
-function loadDraft() {
-  let draft = null;
-  try { draft = localStorage.getItem(DRAFT_KEY); } catch (e) {}
-  if (!draft) return;
-  try {
-    const parsed = JSON.parse(draft);
-    if (JSON.stringify(parsed) !== JSON.stringify(scheduleData)) {
-      scheduleData = parsed;
-      document.getElementById('draftNotice').classList.remove('hidden');
-    }
-  } catch (e) {}
-}
-
-function discardDraft() {
-  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
-  location.reload();
-}
-
-function clearDraft() {
-  try { localStorage.removeItem(DRAFT_KEY); } catch (e) {}
-  document.getElementById('draftNotice').classList.add('hidden');
-}
+function saveDraft() {}
 function adminLogout() {
   adminLoggedIn = false;
   document.getElementById('adminLogin').classList.remove('hidden');
@@ -2301,7 +2268,6 @@ async function publishToGitHub() {
       status.style.background = '#f0fff4';
       status.style.color = '#276749';
       status.textContent = '✅ עודכן בהצלחה! כל העובדים רואים את השינוי תוך דקה.';
-      clearDraft();
     } else {
       const err = await pushRes.text().catch(() => '');
       throw new Error(`שגיאה (${pushRes.status}): ${err || pushRes.statusText}`);

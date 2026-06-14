@@ -606,6 +606,13 @@
       <!-- SWAP SECTION (today/tomorrow) -->
       <div id="swapSection"></div>
 
+      <!-- WEEK SEARCH (find & swap any shift this week, by employee name) -->
+      <div style="margin-top:24px">
+        <h2 style="margin-bottom:10px">🔍 חיפוש משמרות לפי עובד (כל השבוע)</h2>
+        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px">
+        <div id="weekSearchResults"></div>
+      </div>
+
       <div id="moreDaysSection" class="hidden">
         <div class="week-selector">
           <label>שבוע:</label>
@@ -2105,9 +2112,34 @@ function renderSwapSection() {
     + `<div style="margin-top:16px">${dayBlock(tom, 'מחר', 'background:linear-gradient(135deg,#6b46c1,#553c9a)')}</div>`;
 }
 
+function renderWeekSearch() {
+  const box = document.getElementById('weekSearchResults');
+  const q = (document.getElementById('weekSearchInput').value || '').trim();
+  if (!q) { box.innerHTML = ''; return; }
+
+  const dates = getWeekDates();
+  const matches = scheduleData.shifts
+    .map((s, idx) => ({ s, idx }))
+    .filter(({ s }) => s.name.includes(q))
+    .sort((a, b) => a.s.day - b.s.day || (a.s.role > b.s.role ? 1 : -1));
+
+  if (!matches.length) {
+    box.innerHTML = `<div class="no-data">לא נמצאו משמרות לעובד "${q}"</div>`;
+    return;
+  }
+
+  box.innerHTML = matches.map(({ s, idx }) => `
+    <div class="swap-item">
+      <span class="role">${DAYS_HE[s.day]} ${formatDate(dates[s.day])} — ${s.role}</span>
+      <select onchange="updateShift(${idx},'name',this.value)">${employeeOptions(s.name)}</select>
+      <input value="${s.note||''}" placeholder="הערה (לא חובה)" onchange="updateShift(${idx},'note',this.value)">
+    </div>`).join('');
+}
+
 // ---- ADMIN TABLE ----
 function renderAdminTable() {
   renderSwapSection();
+  renderWeekSearch();
   const sorted = [...scheduleData.shifts].sort((a,b) => a.day - b.day || (a.role > b.role ? 1 : -1));
 
   // Desktop table

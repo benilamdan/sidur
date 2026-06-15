@@ -584,7 +584,7 @@
   <div id="tab-employee" class="hidden">
     <div class="search-box" style="position:relative;flex-direction:column;gap:0">
       <div style="display:flex;gap:10px;width:100%">
-        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off" oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1">
+        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off" oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1" __gcruniqueid="1">
         <button onclick="empConfirm()">חפש</button>
       </div>
       <div id="empDropdown" style="display:none;position:absolute;top:54px;right:0;left:0;background:white;border:2px solid #2b6cb0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:200;max-height:260px;overflow-y:auto"></div>
@@ -596,7 +596,7 @@
   <div id="tab-admin" class="hidden">
     <div id="adminLogin" class="admin-login">
       <h2>🔒 כניסת מנהל</h2>
-      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()">
+      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()" __gcruniqueid="2">
       <button onclick="adminLogin()">כניסה</button>
       <div class="err hidden" id="adminErr">סיסמה שגויה</div>
     </div>
@@ -607,7 +607,7 @@
       <!-- WEEK SEARCH (find & swap any shift this week, by employee name) -->
       <div style="margin-top:24px">
         <h2 style="margin-bottom:10px">🔍 חיפוש משמרות לפי עובד (כל השבוע)</h2>
-        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px">
+        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px" __gcruniqueid="3">
         <div id="weekSearchResults"></div>
       </div>
 
@@ -620,7 +620,7 @@
         </div>
 
         <div class="admin-toolbar">
-          <select id="newDay">
+          <select id="newDay" __gcruniqueid="4">
             <option value="0">ראשון</option>
             <option value="1">שני</option>
             <option value="2">שלישי</option>
@@ -629,9 +629,9 @@
             <option value="5">שישי</option>
             <option value="6">שבת</option>
           </select>
-          <input type="text" id="newRole" placeholder="תפקיד / משמרת">
-          <input type="text" id="newName" placeholder="שם עובד">
-          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
+          <input type="text" id="newRole" placeholder="תפקיד / משמרת" __gcruniqueid="5">
+          <input type="text" id="newName" placeholder="שם עובד" __gcruniqueid="6">
+          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)" __gcruniqueid="7">
           <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
         </div>
 
@@ -1515,7 +1515,7 @@ let scheduleData = {
     {
       "day": 2,
       "role": "ע-פ",
-      "name": "אלמו ביקאייה",
+      "name": "וודו אספה",
       "note": ""
     },
     {

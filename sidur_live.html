@@ -520,7 +520,7 @@
 </header>
 
 <!-- Install banner -->
-<div id="installBtn" style="display:none;background:#f0f7ff;border-bottom:1px solid #bee3f8;padding:10px 16px;align-items:center;gap:10px;justify-content:space-between">
+<div id="installBtn" style="display:flex;background:#f0f7ff;border-bottom:1px solid #bee3f8;padding:10px 16px;align-items:center;gap:10px;justify-content:space-between">
   <div style="display:flex;align-items:center;gap:10px">
     <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
       <rect x="2" y="2" width="44" height="44" fill="#2147a8"/>
@@ -2939,6 +2939,13 @@ function installApp() {
   if (deferredPrompt) {
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    return;
+  }
+  const ua = navigator.userAgent || '';
+  if (/iphone|ipad|ipod/i.test(ua)) {
+    alert('להוספה למסך הבית ב-iPhone:\n1. הקש על כפתור השיתוף (Share) בתחתית המסך\n2. גלול ובחר "הוסף למסך הבית"');
+  } else {
+    alert('להוספה למסך הבית:\n1. הקש על שלוש הנקודות ⋮ בפינת הדפדפן\n2. בחר "הוספה למסך הבית" או "התקנת אפליקציה"');
   }
 }
 

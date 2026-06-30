@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl"><head>
+<html lang="he" dir="rtl">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="mobile-web-app-capable" content="yes">
@@ -499,13 +500,13 @@
   <div class="header-left">
     <svg class="wolfson-logo" viewBox="0 0 160 56" xmlns="http://www.w3.org/2000/svg">
       <!-- logo mark -->
-      <rect x="2" y="2" width="24" height="24" fill="#2147a8"></rect>
-      <polygon points="28,2 52,2 52,26" fill="#f5c200"></polygon>
-      <circle cx="13" cy="42" r="12" fill="#d32020"></circle>
-      <line x1="28" y1="30" x2="52" y2="30" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"></line>
-      <line x1="28" y1="38" x2="52" y2="38" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"></line>
-      <line x1="28" y1="46" x2="52" y2="46" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"></line>
-      <line x1="28" y1="54" x2="52" y2="54" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"></line>
+      <rect x="2" y="2" width="24" height="24" fill="#2147a8"/>
+      <polygon points="28,2 52,2 52,26" fill="#f5c200"/>
+      <circle cx="13" cy="42" r="12" fill="#d32020"/>
+      <line x1="28" y1="30" x2="52" y2="30" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="38" x2="52" y2="38" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="46" x2="52" y2="46" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="54" x2="52" y2="54" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
       <!-- text -->
       <text x="60" y="22" font-family="Arial" font-size="13" font-weight="700" fill="white">משמרות טקסטיל</text>
       <text x="60" y="38" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.75)">המרכז הרפואי וולפסון</text>
@@ -522,13 +523,13 @@
 <div id="installBtn" style="display:flex;background:#f0f7ff;border-bottom:1px solid #bee3f8;padding:10px 16px;align-items:center;gap:10px;justify-content:space-between">
   <div style="display:flex;align-items:center;gap:10px">
     <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <rect x="2" y="2" width="44" height="44" fill="#2147a8"></rect>
-      <polygon points="54,2 98,2 98,46" fill="#f5c200"></polygon>
-      <circle cx="24" cy="76" r="22" fill="#d32020"></circle>
-      <line x1="54" y1="56" x2="98" y2="56" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"></line>
-      <line x1="54" y1="68" x2="98" y2="68" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"></line>
-      <line x1="54" y1="80" x2="98" y2="80" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"></line>
-      <line x1="54" y1="92" x2="98" y2="92" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"></line>
+      <rect x="2" y="2" width="44" height="44" fill="#2147a8"/>
+      <polygon points="54,2 98,2 98,46" fill="#f5c200"/>
+      <circle cx="24" cy="76" r="22" fill="#d32020"/>
+      <line x1="54" y1="56" x2="98" y2="56" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="68" x2="98" y2="68" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="80" x2="98" y2="80" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="92" x2="98" y2="92" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
     </svg>
     <span style="font-size:0.9rem;color:#1a3a6b;font-weight:600">הוסף למסך הבית</span>
   </div>
@@ -584,7 +585,8 @@
   <div id="tab-employee" class="hidden">
     <div class="search-box" style="position:relative;flex-direction:column;gap:0">
       <div style="display:flex;gap:10px;width:100%">
-        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off" oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1" __gcruniqueid="1">
+        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off"
+          oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1">
         <button onclick="empConfirm()">חפש</button>
       </div>
       <div id="empDropdown" style="display:none;position:absolute;top:54px;right:0;left:0;background:white;border:2px solid #2b6cb0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:200;max-height:260px;overflow-y:auto"></div>
@@ -596,7 +598,7 @@
   <div id="tab-admin" class="hidden">
     <div id="adminLogin" class="admin-login">
       <h2>🔒 כניסת מנהל</h2>
-      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()" __gcruniqueid="2">
+      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()">
       <button onclick="adminLogin()">כניסה</button>
       <div class="err hidden" id="adminErr">סיסמה שגויה</div>
     </div>
@@ -607,7 +609,7 @@
       <!-- WEEK SEARCH (find & swap any shift this week, by employee name) -->
       <div style="margin-top:24px">
         <h2 style="margin-bottom:10px">🔍 חיפוש משמרות לפי עובד (כל השבוע)</h2>
-        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px" __gcruniqueid="3">
+        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px">
         <div id="weekSearchResults"></div>
       </div>
 
@@ -620,7 +622,7 @@
         </div>
 
         <div class="admin-toolbar">
-          <select id="newDay" __gcruniqueid="4">
+          <select id="newDay">
             <option value="0">ראשון</option>
             <option value="1">שני</option>
             <option value="2">שלישי</option>
@@ -629,9 +631,9 @@
             <option value="5">שישי</option>
             <option value="6">שבת</option>
           </select>
-          <input type="text" id="newRole" placeholder="תפקיד / משמרת" __gcruniqueid="5">
-          <input type="text" id="newName" placeholder="שם עובד" __gcruniqueid="6">
-          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)" __gcruniqueid="7">
+          <input type="text" id="newRole" placeholder="תפקיד / משמרת">
+          <input type="text" id="newName" placeholder="שם עובד">
+          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
           <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
         </div>
 
@@ -682,1064 +684,186 @@ const ADMIN_PASSWORD = "1221"; // ← שנה סיסמה!
 
 // weekStart: תאריך ראשון של השבוע (ראשון) בפורמט YYYY-MM-DD
 let scheduleData = {
-  "weekStart": "2026-06-28",
+  "weekStart": "2026-07-05",
   "shifts": [
-    {
-      "day": 0,
-      "role": "ב-מ/פ",
-      "name": "פנטה טגאיא",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב-פ",
-      "name": "פנטה טגאיא",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב-05:00",
-      "name": "פנטה טגאיא",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב-05:00",
-      "name": "פנטה טגאיא",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "פרסונל20:00",
-      "name": "קסה אספאו",
-      "note": "מחזיר לפנטה"
-    },
-    {
-      "day": 1,
-      "role": "ב-מ/פ",
-      "name": "גושה סמין",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב-מ/פ",
-      "name": "גושה סמין",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב-05:00",
-      "name": "גושה סמין",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב-מ/פ",
-      "name": "גושה סמין",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב-מ/פ",
-      "name": "גושה סמין",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "צגה גוביה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע",
-      "name": "צגה גוביה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע",
-      "name": "צגה גוביה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "צגה גוביה",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "מחסן22:00",
-      "name": "צגה גוביה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "קסה אספאו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב-05:00",
-      "name": "קסה אספאו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב-מ/פ",
-      "name": "פנטה טגאיא",
-      "note": "במקום קסה"
-    },
-    {
-      "day": 4,
-      "role": "ב-05:00",
-      "name": "קסה אספאו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב-גיהוץ",
-      "name": "קסה אספאו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "א",
-      "name": "בלאצ'או הבטאם",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "א",
-      "name": "בלאצ'או הבטאם",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "א",
-      "name": "בלאצ'או הבטאם",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "א",
-      "name": "בלאצ'או הבטאם",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "ייבוש20:00",
-      "name": "בלאצ'או הבטאם",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "גולה אמבסאו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "גולה אמבסאו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "גולה אמבסאו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב-גיהוץ",
-      "name": "גולה אמבסאו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "גולה אמבסאו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "מ",
-      "name": "יהונה גוואדי",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב-ייבוש",
-      "name": "יהונה גוואדי",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "מ",
-      "name": "יהונה גוואדי",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב-ייבוש",
-      "name": "יהונה גוואדי",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "יהונה גוואדי",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע",
-      "name": "משה צקול",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע",
-      "name": "משה צקול",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "מ",
-      "name": "משה צקול",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע",
-      "name": "משה צקול",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "מחסן22:00",
-      "name": "משה צקול",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע-פ",
-      "name": "אבי אסממאו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע",
-      "name": "אבי אסממאו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "עא",
-      "name": "אבי אסממאו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "עא",
-      "name": "אבי אסממאו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "עא",
-      "name": "אבי אסממאו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "עא",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "עא",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "רפאל יחנוב",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "רפאל יחנוב",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "רפאל יחנוב",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "רפאל יחנוב",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "רפאל יחנוב",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "עא",
-      "name": "טספיי אצנפה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "עא",
-      "name": "טספיי אצנפה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "עא",
-      "name": "טספיי אצנפה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע-פ",
-      "name": "טספיי אצנפה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "עא",
-      "name": "טספיי אצנפה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "מ",
-      "name": "מוקטו גרמאו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב-ייבוש",
-      "name": "מוקטו גרמאו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "מ",
-      "name": "מוקטו גרמאו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "מ",
-      "name": "מוקטו גרמאו",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "ע",
-      "name": "מוקטו גרמאו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע-פ",
-      "name": "גטא'צ'או אסאייה",
-      "note": "מחלה"
-    },
-    {
-      "day": 1,
-      "role": "עמ",
-      "name": "מברטו ברהנו",
-      "note": "גטאצו יחליף הבחמישי"
-    },
-    {
-      "day": 2,
-      "role": "ע",
-      "name": "גטא'צ'או אסאייה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע-ייבוש",
-      "name": "גטא'צ'או אסאייה",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "עא",
-      "name": "גטא'צ'או אסאייה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "אברראו צקול",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "אברראו צקול",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "אברראו צקול",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "אברראו צקול",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "מחסן22:00",
-      "name": "אברראו צקול",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "מספון דלנסאו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב-עגלות",
-      "name": "מספון דלנסאו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "מספון דלנסאו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "מספון דלנסאו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב-עגלות",
-      "name": "מספון דלנסאו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע",
-      "name": "קאסאו האילה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע-אחראי",
-      "name": "קאסאו האילה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע-פ",
-      "name": "קאסאו האילה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "א",
-      "name": "קאסאו האילה",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "עא",
-      "name": "קאסאו האילה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע-אחראי",
-      "name": "אדמה וודנך",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע",
-      "name": "אדמה וודנך",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע-אחראי",
-      "name": "אדמה וודנך",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע-אחראי",
-      "name": "אדמה וודנך",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ע-ייבוש",
-      "name": "אדמה וודנך",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "עמי טשאלה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "עמי טשאלה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "עמי טשאלה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "עמי טשאלה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "עמי טשאלה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע-אחראי",
-      "name": "וודו אספה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע-פ",
-      "name": "וודו אספה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "עמ",
-      "name": "וודו אספה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע-ייבוש",
-      "name": "אדנה בזה",
-      "note": "במקום וודו"
-    },
-    {
-      "day": 6,
-      "role": "מחסן/גיהוץ20:00",
-      "name": "וודו אספה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב-ווילונות",
-      "name": "בריהון אייאיו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "בריהון אייאיו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "בריהון אייאיו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "בריהון אייאיו",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "א",
-      "name": "בריהון אייאיו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "אבינט אבאוה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "אבינט אבאוה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע",
-      "name": "אבינט אבאוה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "עמ",
-      "name": "אבינט אבאוה",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "מכונות20:00",
-      "name": "אבינט אבאוה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב-ייבוש",
-      "name": "אילה אונקאהונה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "אילה אונקאהונה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "א",
-      "name": "אילה אונקאהונה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב-ייבוש",
-      "name": "אילה אונקאהונה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב",
-      "name": "אילה אונקאהונה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע",
-      "name": "מולה קאסה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע",
-      "name": "דמל קאסה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע",
-      "name": "מולה קאסה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "א",
-      "name": "מולה קאסה",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "א",
-      "name": "מולה קאסה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "עמ",
-      "name": "אדנה בזה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע-ייבוש",
-      "name": "אדנה בזה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "עמ",
-      "name": "אדנה בזה",
-      "note": ""
-    },
-    {
-      "day": 5,
-      "role": "ב-ייבוש",
-      "name": "וודו אספה",
-      "note": "מחזיר לאדנה"
-    },
-    {
-      "day": 6,
-      "role": "ב",
-      "name": "אדנה בזה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "א",
-      "name": "רפאלוב דוד",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "א",
-      "name": "רפאלוב דוד",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "א",
-      "name": "רפאלוב דוד",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "א",
-      "name": "רפאלוב דוד",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "א",
-      "name": "רפאלוב דוד",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "עא",
-      "name": "אלמו ביקאייה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "עא",
-      "name": "אלמו ביקאייה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "עא",
-      "name": "אלמו ביקאייה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "אלמו ביקאייה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "אלמו ביקאייה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "א",
-      "name": "שימונוב ניסן",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "א",
-      "name": "שימונוב ניסן",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "א",
-      "name": "שימונוב ניסן",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "א",
-      "name": "שימונוב ניסן",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "א",
-      "name": "שימונוב ניסן",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "אמארה סטארגו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "אמארה סטארגו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "אמארה סטארגו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "מבחן",
-      "name": "אמארה סטארגו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "אמארה סטארגו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע-ייבוש",
-      "name": "מברטו ברהנו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע-ייבוש",
-      "name": "מברטו ברהנו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע",
-      "name": "מברטו ברהנו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "עמ",
-      "name": "מברטו ברהנו",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "א",
-      "name": "מברטו ברהנו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "חיים כהן",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "חיים כהן",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "חיים כהן",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "חיים כהן",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ע",
-      "name": "בתיה אלמיהו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "בתיה אלמיהו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "בתיה אלמיהו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "בתיה אלמיהו",
-      "note": ""
-    },
-    {
-      "day": 6,
-      "role": "פרסונל20:00",
-      "name": "בתיה אלמיהו",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "טקלה פקדו טזרה",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "טקלה פקדו טזרה",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "טקלה פקדו טזרה",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "טקלה פקדו טזרה",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "טקלה פקדו טזרה",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "אמה אראנוב",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ב",
-      "name": "אמה אראנוב",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ב",
-      "name": "אמה אראנוב",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "אמה אראנוב",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ע",
-      "name": "אמה אראנוב",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ב",
-      "name": "לריסה גולקרוב",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "לריסה גולקרוב",
-      "note": ""
-    },
-    {
-      "day": 0,
-      "role": "ב",
-      "name": "יפה קוניו",
-      "note": ""
-    },
-    {
-      "day": 1,
-      "role": "ע",
-      "name": "יפה קוניו",
-      "note": ""
-    },
-    {
-      "day": 2,
-      "role": "ע",
-      "name": "יפה קוניו",
-      "note": ""
-    },
-    {
-      "day": 3,
-      "role": "ע",
-      "name": "יפה קוניו",
-      "note": ""
-    },
-    {
-      "day": 4,
-      "role": "ב",
-      "name": "יפה קוניו",
-      "note": ""
-    }
+    {"day":0,"role":"ב-מ/פ","name":"דני וודגה","note":""},
+    {"day":3,"role":"ב-מ/פ","name":"דני וודגה","note":""},
+    {"day":4,"role":"ב-05:00","name":"דני וודגה","note":""},
+    {"day":5,"role":"ב","name":"דני וודגה","note":""},
+    {"day":6,"role":"פרסונל20:00","name":"דני וודגה","note":""},
+    {"day":1,"role":"ב-פ 05:00","name":"פנטה טגאיא","note":""},
+    {"day":2,"role":"ב","name":"פנטה טגאיא","note":""},
+    {"day":3,"role":"ב","name":"פנטה טגאיא","note":""},
+    {"day":4,"role":"ב-מ/פ","name":"פנטה טגאיא","note":""},
+    {"day":5,"role":"ב-05:00","name":"פנטה טגאיא","note":""},
+    {"day":0,"role":"ב","name":"גושה סמין","note":""},
+    {"day":2,"role":"ב-מ/פ","name":"גושה סמין","note":""},
+    {"day":3,"role":"ב-05:00","name":"גושה סמין","note":""},
+    {"day":4,"role":"ב","name":"גושה סמין","note":""},
+    {"day":5,"role":"ב-מ/פ","name":"גושה סמין","note":""},
+    {"day":0,"role":"עא","name":"צגה גוביה","note":""},
+    {"day":1,"role":"א","name":"צגה גוביה","note":""},
+    {"day":0,"role":"ב","name":"צ'קולה בדמאו","note":""},
+    {"day":1,"role":"ב-ווילונות","name":"צ'קולה בדמאו","note":""},
+    {"day":2,"role":"א","name":"צ'קולה בדמאו","note":""},
+    {"day":5,"role":"ב-גיהוץ","name":"צ'קולה בדמאו","note":""},
+    {"day":6,"role":"א","name":"צ'קולה בדמאו","note":""},
+    {"day":0,"role":"ב","name":"קסה אספאו","note":""},
+    {"day":2,"role":"ב-05:00","name":"קסה אספאו","note":""},
+    {"day":4,"role":"ב","name":"קסה אספאו","note":""},
+    {"day":5,"role":"ב","name":"קסה אספאו","note":""},
+    {"day":6,"role":"ב","name":"קסה אספאו","note":""},
+    {"day":0,"role":"ב-ייבוש","name":"בלאצ'או הבטאם","note":""},
+    {"day":1,"role":"מ","name":"בלאצ'או הבטאם","note":""},
+    {"day":3,"role":"ב-ייבוש","name":"בלאצ'או הבטאם","note":""},
+    {"day":4,"role":"מ","name":"בלאצ'או הבטאם","note":""},
+    {"day":5,"role":"ע/עמ","name":"בלאצ'או הבטאם","note":""},
+    {"day":0,"role":"ב-עגלות","name":"גולה אמבסאו","note":""},
+    {"day":1,"role":"ב-מ/פ","name":"גולה אמבסאו","note":""},
+    {"day":2,"role":"ב","name":"גולה אמבסאו","note":""},
+    {"day":4,"role":"ב-ווילונות","name":"גולה אמבסאו","note":""},
+    {"day":0,"role":"ב","name":"יהונה גוואדי","note":""},
+    {"day":1,"role":"ב","name":"יהונה גוואדי","note":""},
+    {"day":2,"role":"ב","name":"יהונה גוואדי","note":""},
+    {"day":5,"role":"מ","name":"יהונה גוואדי","note":""},
+    {"day":6,"role":"פרסונל20:00","name":"יהונה גוואדי","note":""},
+    {"day":1,"role":"א","name":"משה צקול","note":""},
+    {"day":2,"role":"א","name":"משה צקול","note":""},
+    {"day":3,"role":"א","name":"משה צקול","note":""},
+    {"day":4,"role":"א","name":"משה צקול","note":""},
+    {"day":5,"role":"א","name":"משה צקול","note":""},
+    {"day":0,"role":"ע","name":"אבי אסממאו","note":""},
+    {"day":1,"role":"ע-פ","name":"אבי אסממאו","note":""},
+    {"day":2,"role":"ע","name":"אבי אסממאו","note":""},
+    {"day":4,"role":"ע-אחראי","name":"אבי אסממאו","note":""},
+    {"day":6,"role":"ע","name":"אבי אסממאו","note":""},
+    {"day":0,"role":"מ","name":"דמל קאסה","note":""},
+    {"day":1,"role":"ב","name":"דמל קאסה","note":""},
+    {"day":2,"role":"ב-ייבוש","name":"דמל קאסה","note":""},
+    {"day":3,"role":"ע","name":"דמל קאסה","note":""},
+    {"day":5,"role":"ב","name":"דמל קאסה","note":""},
+    {"day":0,"role":"ב","name":"רפאל יחנוב","note":""},
+    {"day":2,"role":"ב","name":"רפאל יחנוב","note":""},
+    {"day":3,"role":"ב","name":"רפאל יחנוב","note":""},
+    {"day":4,"role":"ב","name":"רפאל יחנוב","note":""},
+    {"day":5,"role":"ב","name":"רפאל יחנוב","note":""},
+    {"day":2,"role":"עמ","name":"טספיי אצנפה","note":""},
+    {"day":3,"role":"עמ","name":"טספיי אצנפה","note":""},
+    {"day":4,"role":"ע-ייבוש","name":"טספיי אצנפה","note":""},
+    {"day":5,"role":"ע-ייבוש","name":"טספיי אצנפה","note":""},
+    {"day":6,"role":"עא","name":"טספיי אצנפה","note":""},
+    {"day":0,"role":"א","name":"מוקטו גרמאו","note":""},
+    {"day":3,"role":"א","name":"מוקטו גרמאו","note":""},
+    {"day":4,"role":"א","name":"מוקטו גרמאו","note":""},
+    {"day":5,"role":"ב","name":"מוקטו גרמאו","note":""},
+    {"day":6,"role":"מחסן22:00","name":"מוקטו גרמאו","note":""},
+    {"day":0,"role":"עא","name":"מלאק אבבה","note":""},
+    {"day":1,"role":"עא","name":"מלאק אבבה","note":""},
+    {"day":3,"role":"עא","name":"מלאק אבבה","note":""},
+    {"day":5,"role":"א","name":"מלאק אבבה","note":""},
+    {"day":6,"role":"מכונות20:00","name":"מלאק אבבה","note":""},
+    {"day":0,"role":"ע","name":"גטא'צ'או אסאייה","note":""},
+    {"day":1,"role":"ע","name":"גטא'צ'או אסאייה","note":""},
+    {"day":3,"role":"ע-פ","name":"גטא'צ'או אסאייה","note":""},
+    {"day":5,"role":"עא","name":"גטא'צ'או אסאייה","note":""},
+    {"day":6,"role":"מחסן/גיהוץ20:00","name":"גטא'צ'או אסאייה","note":""},
+    {"day":1,"role":"ב","name":"אברראו צקול","note":""},
+    {"day":2,"role":"ב","name":"אברראו צקול","note":""},
+    {"day":3,"role":"ב","name":"אברראו צקול","note":""},
+    {"day":4,"role":"ב","name":"אברראו צקול","note":""},
+    {"day":5,"role":"ב","name":"אברראו צקול","note":""},
+    {"day":0,"role":"עמ","name":"אקלילו עלמסט","note":""},
+    {"day":1,"role":"ע-ייבוש","name":"אקלילו עלמסט","note":""},
+    {"day":3,"role":"ע-ייבוש","name":"אקלילו עלמסט","note":""},
+    {"day":4,"role":"עמ","name":"אקלילו עלמסט","note":""},
+    {"day":6,"role":"מחסן22:00","name":"אקלילו עלמסט","note":""},
+    {"day":1,"role":"ע","name":"קאסאו האילה","note":""},
+    {"day":2,"role":"ע-פ","name":"קאסאו האילה","note":""},
+    {"day":3,"role":"ע","name":"קאסאו האילה","note":""},
+    {"day":4,"role":"ע","name":"קאסאו האילה","note":""},
+    {"day":5,"role":"א","name":"קאסאו האילה","note":""},
+    {"day":0,"role":"ע-אחראי","name":"אדמה וודנך","note":""},
+    {"day":1,"role":"ב-ייבוש","name":"אדמה וודנך","note":""},
+    {"day":1,"role":"ע-אחראי","name":"וודו אספה","note":""},
+    {"day":2,"role":"ע","name":"וודו אספה","note":""},
+    {"day":3,"role":"ע-אחראי","name":"וודו אספה","note":""},
+    {"day":4,"role":"ע","name":"וודו אספה","note":""},
+    {"day":5,"role":"עא","name":"וודו אספה","note":""},
+    {"day":0,"role":"ב-ווילונות","name":"בריהון אייאיו","note":""},
+    {"day":2,"role":"ב-ווילונות","name":"בריהון אייאיו","note":""},
+    {"day":3,"role":"ב-ווילונות","name":"בריהון אייאיו","note":""},
+    {"day":5,"role":"ב-ווילונות","name":"בריהון אייאיו","note":""},
+    {"day":6,"role":"מחסן22:00","name":"בריהון אייאיו","note":""},
+    {"day":1,"role":"ב","name":"אבינט אבאוה","note":""},
+    {"day":2,"role":"מ","name":"אבינט אבאוה","note":""},
+    {"day":3,"role":"ב","name":"אבינט אבאוה","note":""},
+    {"day":4,"role":"ב","name":"אבינט אבאוה","note":""},
+    {"day":5,"role":"ב-ייבוש","name":"אבינט אבאוה","note":""},
+    {"day":0,"role":"א","name":"אילה אונקאהונה","note":""},
+    {"day":1,"role":"ב","name":"אילה אונקאהונה","note":""},
+    {"day":2,"role":"ע","name":"אילה אונקאהונה","note":""},
+    {"day":3,"role":"ב","name":"אילה אונקאהונה","note":""},
+    {"day":6,"role":"עא","name":"אילה אונקאהונה","note":""},
+    {"day":0,"role":"ע-ייבוש","name":"מולה קאסה","note":""},
+    {"day":1,"role":"עמ","name":"מולה קאסה","note":""},
+    {"day":2,"role":"ע-ייבוש","name":"מולה קאסה","note":""},
+    {"day":3,"role":"מ","name":"מולה קאסה","note":""},
+    {"day":4,"role":"ייבוש","name":"מולה קאסה","note":""},
+    {"day":0,"role":"ע","name":"אדנה בזה","note":""},
+    {"day":1,"role":"עא","name":"אדנה בזה","note":""},
+    {"day":2,"role":"עא","name":"אדנה בזה","note":""},
+    {"day":4,"role":"עא","name":"אדנה בזה","note":""},
+    {"day":6,"role":"א","name":"אדנה בזה","note":""},
+    {"day":0,"role":"ע-פ","name":"אלמו ביקאייה","note":""},
+    {"day":1,"role":"ע","name":"אלמו ביקאייה","note":""},
+    {"day":2,"role":"ע-אחראי","name":"אלמו ביקאייה","note":""},
+    {"day":3,"role":"ע","name":"אלמו ביקאייה","note":""},
+    {"day":4,"role":"ע-פ","name":"אלמו ביקאייה","note":""},
+    {"day":0,"role":"א","name":"שימונוב ניסן","note":""},
+    {"day":1,"role":"א","name":"שימונוב ניסן","note":""},
+    {"day":2,"role":"א","name":"שימונוב ניסן","note":""},
+    {"day":3,"role":"א","name":"שימונוב ניסן","note":""},
+    {"day":4,"role":"א","name":"שימונוב ניסן","note":""},
+    {"day":0,"role":"ב","name":"אמארה סטארגו","note":""},
+    {"day":1,"role":"ב","name":"אמארה סטארגו","note":""},
+    {"day":2,"role":"ב","name":"אמארה סטארגו","note":""},
+    {"day":3,"role":"ב","name":"אמארה סטארגו","note":""},
+    {"day":4,"role":"ב","name":"אמארה סטארגו","note":""},
+    {"day":2,"role":"עא","name":"מברטו ברהנו","note":""},
+    {"day":3,"role":"עא","name":"מברטו ברהנו","note":""},
+    {"day":4,"role":"עא","name":"מברטו ברהנו","note":""},
+    {"day":5,"role":"ב","name":"מברטו ברהנו","note":""},
+    {"day":6,"role":"ייבוש20:00","name":"מברטו ברהנו","note":""},
+    {"day":0,"role":"ב","name":"חיים כהן","note":""},
+    {"day":1,"role":"ב","name":"חיים כהן","note":""},
+    {"day":2,"role":"ב","name":"חיים כהן","note":""},
+    {"day":3,"role":"ב","name":"חיים כהן","note":""},
+    {"day":4,"role":"ב","name":"חיים כהן","note":""},
+    {"day":0,"role":"ב","name":"טקלה פקדו טזרה","note":""},
+    {"day":1,"role":"ב","name":"טקלה פקדו טזרה","note":""},
+    {"day":2,"role":"ב","name":"טקלה פקדו טזרה","note":""},
+    {"day":3,"role":"ב","name":"טקלה פקדו טזרה","note":""},
+    {"day":4,"role":"ב","name":"טקלה פקדו טזרה","note":""},
+    {"day":0,"role":"ע","name":"אמה אראנוב","note":""},
+    {"day":1,"role":"ע","name":"אמה אראנוב","note":""},
+    {"day":2,"role":"ע","name":"אמה אראנוב","note":""},
+    {"day":3,"role":"ע","name":"אמה אראנוב","note":""},
+    {"day":4,"role":"ע","name":"אמה אראנוב","note":""},
+    {"day":0,"role":"ב","name":"לריסה גולקרוב","note":""},
+    {"day":1,"role":"ב","name":"לריסה גולקרוב","note":""},
+    {"day":2,"role":"ב","name":"לריסה גולקרוב","note":""},
+    {"day":3,"role":"ב","name":"לריסה גולקרוב","note":""},
+    {"day":4,"role":"ב","name":"לריסה גולקרוב","note":""},
+    {"day":0,"role":"ב","name":"יפה קוניו","note":""},
+    {"day":1,"role":"ב","name":"יפה קוניו","note":""},
+    {"day":2,"role":"ב","name":"יפה קוניו","note":""},
+    {"day":3,"role":"ב","name":"יפה קוניו","note":""},
+    {"day":4,"role":"ע-מחסן","name":"יפה קוניו","note":""},
+    {"day":0,"role":"ב","name":"גלית עזר אוזר","note":""},
+    {"day":1,"role":"ב","name":"גלית עזר אוזר","note":""},
+    {"day":2,"role":"ב","name":"גלית עזר אוזר","note":""},
+    {"day":3,"role":"ב","name":"גלית עזר אוזר","note":""},
+    {"day":4,"role":"ב","name":"גלית עזר אוזר","note":""}
   ]
 };
 // ============================================================
@@ -2331,4 +1455,6 @@ function downloadHTML() {
 // ---- INIT ----
 updateHeader();
 renderToday();
-</script></body></html>
+</script>
+</body>
+</html>

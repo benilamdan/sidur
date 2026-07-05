@@ -875,6 +875,25 @@ function isNightRole(role) {
   if (m && parseInt(m[1], 10) >= 20) return true;
   return role === 'מ';
 }
+function roleOrder(role) {
+  // Shabbat night roles (with time) go last — handled separately
+  if (/\d{1,2}:\d{2}/.test(role)) return 90; // פרסונל20:00, מחסן22:00 etc
+  if (role === 'א') return 1;
+  if (role === 'ב') return 2;
+  if (role === 'מ') return 3;
+  if (role === 'ייבוש') return 4;
+  if (role === 'גיהוץ') return 5;
+  if (role.startsWith('ב')) return 6;
+  if (role === 'עא') return 7;
+  if (role === 'ע' || role === 'ע ') return 8;
+  if (role === 'עמ') return 9;
+  if (role === 'ע-ייבוש') return 10;
+  if (role.startsWith('ע')) return 11;
+  return 50;
+}
+function sortShifts(arr) {
+  return [...arr].sort((a, b) => roleOrder(a.role) - roleOrder(b.role) || a.name.localeCompare(b.name, 'he'));
+}
 const DAYS_JS = [0,1,2,3,4,5,6]; // JS: 0=Sun
 
 let currentTab = 'today';
@@ -983,9 +1002,9 @@ function renderToday() {
   }
 
   const isShabbat = ti === 6;
-  const morning = shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role)));
-  const evening = shifts.filter(s => s.role.startsWith('ע'));
-  const night = isShabbat ? shifts.filter(s => isNightRole(s.role)) : [];
+  const morning = sortShifts(shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role))));
+  const evening = sortShifts(shifts.filter(s => s.role.startsWith('ע')));
+  const night = isShabbat ? sortShifts(shifts.filter(s => isNightRole(s.role))) : [];
 
   function shiftCards(arr) {
     return arr.map(s => `
@@ -1024,9 +1043,9 @@ function renderToday() {
       tList.innerHTML = '<div class="no-data">אין משמרות מוגדרות למחר</div>';
     } else {
       const tIsShabbat = tom === 6;
-      const tm = tShifts.filter(s => !s.role.startsWith('ע') && !(tIsShabbat && isNightRole(s.role)));
-      const te = tShifts.filter(s => s.role.startsWith('ע'));
-      const tn = tIsShabbat ? tShifts.filter(s => isNightRole(s.role)) : [];
+      const tm = sortShifts(tShifts.filter(s => !s.role.startsWith('ע') && !(tIsShabbat && isNightRole(s.role))));
+      const te = sortShifts(tShifts.filter(s => s.role.startsWith('ע')));
+      const tn = tIsShabbat ? sortShifts(tShifts.filter(s => isNightRole(s.role))) : [];
       let th = '';
       if (tm.length) th += `<div class="group-label">☀️ בוקר</div>${shiftCards(tm)}`;
       if (te.length) th += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(te)}`;
@@ -1223,9 +1242,9 @@ function renderSwapSection() {
       return `<div class="today-card"><div class="today-header" style="${headerStyle}">${title}</div><div class="shift-list"><div class="no-data">אין משמרות</div></div></div>`;
     }
     const isShabbat = dayIdx === 6;
-    const morning = shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role)));
-    const evening = shifts.filter(s => s.role.startsWith('ע'));
-    const night = isShabbat ? shifts.filter(s => isNightRole(s.role)) : [];
+    const morning = sortShifts(shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role))));
+    const evening = sortShifts(shifts.filter(s => s.role.startsWith('ע')));
+    const night = isShabbat ? sortShifts(shifts.filter(s => isNightRole(s.role))) : [];
     return `<div class="today-card"><div class="today-header" style="${headerStyle}">${title}</div><div class="shift-list">${group(morning,'☀️ בוקר')}${group(evening,'🌆 ערב')}${group(night,'🌙 לילה')}</div></div>`;
   }
 

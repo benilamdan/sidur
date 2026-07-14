@@ -44,3 +44,10 @@ if updated == html:
 
 HTML_PATH.write_text(updated, encoding='utf-8')
 print(f'Updated sidur_live.html: weekStart={week_start}')
+
+# Update version.json so PWA cache-buster detects new week
+import datetime as _dt
+ts = int(_dt.date.today().strftime('%Y%m%d'))
+version_path = Path(__file__).parent / 'version.json'
+version_path.write_text(json.dumps({'weekStart': week_start, 'ts': ts}, ensure_ascii=False), encoding='utf-8')
+print(f'Updated version.json: ts={ts}')

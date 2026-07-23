@@ -1,1 +1,2418 @@
-test
+﻿<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<script>
+// Force fresh load if server has newer version
+fetch('version.json?t=' + Date.now())
+  .then(r => r.json())
+  .then(v => {
+    if (!location.search.includes('v=' + v.ts)) {
+      location.replace(location.pathname + '?v=' + v.ts);
+    }
+  })
+  .catch(() => {});
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#1a3a6b">
+<title>משמרות טקסטיל | וולפסון</title>
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<link rel="manifest" href="data:application/json;charset=utf-8,%7B%22name%22%3A%22%D7%9E%D7%A9%D7%9E%D7%A8%D7%95%D7%AA%20%D7%98%D7%A7%D7%A1%D7%98%D7%99%D7%9C%22%2C%22short_name%22%3A%22%D7%98%D7%A7%D7%A1%D7%98%D7%99%D7%9C%22%2C%22start_url%22%3A%22.%2Fsidur_live.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%231a3a6b%22%2C%22theme_color%22%3A%22%231a3a6b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz4KPHJlY3Qgd2lkdGg9JzIwMCcgaGVpZ2h0PScyMDAnIGZpbGw9JyNmZmZmZmYnLz4KPHJlY3QgeD0nMzAnIHk9JzEwJyB3aWR0aD0nNjUnIGhlaWdodD0nNjUnIHJ4PSczJyBmaWxsPScjMmMzZThjJy8%2BCjxyZWN0IHg9JzQzLjUnIHk9JzIyJyB3aWR0aD0nMzgnIGhlaWdodD0nNDEnIHJ4PScyLjUnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxsaW5lIHgxPSc0My41JyB5MT0nMzInIHgyPSc4MS41JyB5Mj0nMzInIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxjaXJjbGUgY3g9JzUyJyBjeT0nMjcnIHI9JzEuNScgZmlsbD0nI2ZmZmZmZicvPgo8Y2lyY2xlIGN4PSc1OScgY3k9JzI3JyByPScxLjUnIGZpbGw9JyNmZmZmZmYnLz4KPGNpcmNsZSBjeD0nNjYnIGN5PScyNycgcj0nMS41JyBmaWxsPScjZmZmZmZmJy8%2BCjxjaXJjbGUgY3g9JzYyLjUnIGN5PSc0OScgcj0nMTEnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxjaXJjbGUgY3g9JzYyLjUnIGN5PSc0OScgcj0nNS41JyBmaWxsPSdub25lJyBzdHJva2U9JyNmZmZmZmYnIHN0cm9rZS13aWR0aD0nMi4yJy8%2BCjxyZWN0IHg9JzEwNScgeT0nMTAnIHdpZHRoPSc2NScgaGVpZ2h0PSc2NScgcng9JzMnIGZpbGw9JyNmZmZmZmYnLz4KPHBhdGggZD0nTTEwNSwxMCBMMTcwLDEwIEwxNzAsNzUgWicgZmlsbD0nI2Y3Yzk0OCcvPgo8cmVjdCB4PSczMCcgeT0nODUnIHdpZHRoPSc2NScgaGVpZ2h0PSc2NScgcng9JzMnIGZpbGw9JyNmZmZmZmYnLz4KPGNpcmNsZSBjeD0nNjIuNScgY3k9JzExNy41JyByPScyOScgZmlsbD0nI2UwMmIyYicvPgo8cmVjdCB4PScxMDUnIHk9Jzg1JyB3aWR0aD0nNjUnIGhlaWdodD0nNjUnIHJ4PSczJyBmaWxsPScjZmZmZmZmJy8%2BCjxnIHN0cm9rZT0nIzFmOWQ1NScgc3Ryb2tlLXdpZHRoPSc3Jz4KPGxpbmUgeDE9JzEwNScgeTE9Jzk1JyB4Mj0nMTcwJyB5Mj0nOTUnLz4KPGxpbmUgeDE9JzEwNScgeTE9JzEwNy41JyB4Mj0nMTcwJyB5Mj0nMTA3LjUnLz4KPGxpbmUgeDE9JzEwNScgeTE9JzEyMCcgeDI9JzE3MCcgeTI9JzEyMCcvPgo8bGluZSB4MT0nMTA1JyB5MT0nMTMyLjUnIHgyPScxNzAnIHkyPScxMzIuNScvPgo8bGluZSB4MT0nMTA1JyB5MT0nMTQ1JyB4Mj0nMTcwJyB5Mj0nMTQ1Jy8%2BCjwvZz4KPHRleHQgeD0nMTAwJyB5PScxODAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdTZWdvZSBVSSwgQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjInIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMyYzNlOGMnPtee16nXnteo15XXqiDXmNen16HXmNeZ15w8L3RleHQ%2BCjwvc3ZnPg%3D%3D%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%2C%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMDAgMjAwJz4KPHJlY3Qgd2lkdGg9JzIwMCcgaGVpZ2h0PScyMDAnIGZpbGw9JyNmZmZmZmYnLz4KPHJlY3QgeD0nMzAnIHk9JzEwJyB3aWR0aD0nNjUnIGhlaWdodD0nNjUnIHJ4PSczJyBmaWxsPScjMmMzZThjJy8%2BCjxyZWN0IHg9JzQzLjUnIHk9JzIyJyB3aWR0aD0nMzgnIGhlaWdodD0nNDEnIHJ4PScyLjUnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxsaW5lIHgxPSc0My41JyB5MT0nMzInIHgyPSc4MS41JyB5Mj0nMzInIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxjaXJjbGUgY3g9JzUyJyBjeT0nMjcnIHI9JzEuNScgZmlsbD0nI2ZmZmZmZicvPgo8Y2lyY2xlIGN4PSc1OScgY3k9JzI3JyByPScxLjUnIGZpbGw9JyNmZmZmZmYnLz4KPGNpcmNsZSBjeD0nNjYnIGN5PScyNycgcj0nMS41JyBmaWxsPScjZmZmZmZmJy8%2BCjxjaXJjbGUgY3g9JzYyLjUnIGN5PSc0OScgcj0nMTEnIGZpbGw9J25vbmUnIHN0cm9rZT0nI2ZmZmZmZicgc3Ryb2tlLXdpZHRoPSczJy8%2BCjxjaXJjbGUgY3g9JzYyLjUnIGN5PSc0OScgcj0nNS41JyBmaWxsPSdub25lJyBzdHJva2U9JyNmZmZmZmYnIHN0cm9rZS13aWR0aD0nMi4yJy8%2BCjxyZWN0IHg9JzEwNScgeT0nMTAnIHdpZHRoPSc2NScgaGVpZ2h0PSc2NScgcng9JzMnIGZpbGw9JyNmZmZmZmYnLz4KPHBhdGggZD0nTTEwNSwxMCBMMTcwLDEwIEwxNzAsNzUgWicgZmlsbD0nI2Y3Yzk0OCcvPgo8cmVjdCB4PSczMCcgeT0nODUnIHdpZHRoPSc2NScgaGVpZ2h0PSc2NScgcng9JzMnIGZpbGw9JyNmZmZmZmYnLz4KPGNpcmNsZSBjeD0nNjIuNScgY3k9JzExNy41JyByPScyOScgZmlsbD0nI2UwMmIyYicvPgo8cmVjdCB4PScxMDUnIHk9Jzg1JyB3aWR0aD0nNjUnIGhlaWdodD0nNjUnIHJ4PSczJyBmaWxsPScjZmZmZmZmJy8%2BCjxnIHN0cm9rZT0nIzFmOWQ1NScgc3Ryb2tlLXdpZHRoPSc3Jz4KPGxpbmUgeDE9JzEwNScgeTE9Jzk1JyB4Mj0nMTcwJyB5Mj0nOTUnLz4KPGxpbmUgeDE9JzEwNScgeTE9JzEwNy41JyB4Mj0nMTcwJyB5Mj0nMTA3LjUnLz4KPGxpbmUgeDE9JzEwNScgeTE9JzEyMCcgeDI9JzE3MCcgeTI9JzEyMCcvPgo8bGluZSB4MT0nMTA1JyB5MT0nMTMyLjUnIHgyPScxNzAnIHkyPScxMzIuNScvPgo8bGluZSB4MT0nMTA1JyB5MT0nMTQ1JyB4Mj0nMTcwJyB5Mj0nMTQ1Jy8%2BCjwvZz4KPHRleHQgeD0nMTAwJyB5PScxODAnIHRleHQtYW5jaG9yPSdtaWRkbGUnIGZvbnQtZmFtaWx5PSdTZWdvZSBVSSwgQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0nMjInIGZvbnQtd2VpZ2h0PSc3MDAnIGZpbGw9JyMyYzNlOGMnPtee16nXnteo15XXqiDXmNen16HXmNeZ15w8L3RleHQ%2BCjwvc3ZnPg%3D%3D%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #f0f4f8; color: #1a202c; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #1a3a6b, #0d2247);
+    color: white;
+    padding: 12px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+  .header-left { display: flex; align-items: center; gap: 12px; }
+  .wolfson-logo { width: 48px; height: 48px; flex-shrink: 0; }
+  .header-titles { display: flex; flex-direction: column; gap: 1px; }
+  header h1 { font-size: 1.1rem; font-weight: 700; line-height: 1.2; }
+  header .subtitle { font-size: 0.75rem; opacity: 0.75; letter-spacing: 0.02em; }
+  header .week-label { font-size: 0.82rem; opacity: 0.85; text-align: left; }
+
+  .tabs {
+    display: flex;
+    background: #fff;
+    border-bottom: 2px solid #e2e8f0;
+    padding: 0 20px;
+  }
+  .tab {
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border-bottom: 3px solid transparent;
+    color: #718096;
+    transition: all 0.2s;
+  }
+  .tab.active { color: #2b6cb0; border-bottom-color: #2b6cb0; font-weight: 600; }
+  .tab:hover { color: #2b6cb0; }
+
+  .container { padding: 24px 20px; max-width: 900px; margin: 0 auto; }
+
+  /* TODAY VIEW */
+  .today-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .today-header {
+    background: linear-gradient(135deg, #38a169, #276749);
+    color: white;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .shift-list { padding: 16px; }
+  .shift-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #f7fafc;
+    border-right: 4px solid #38a169;
+  }
+  .shift-item .role { font-weight: 600; color: #2d3748; min-width: 140px; }
+  .shift-item .name { color: #4a5568; }
+  .shift-item .note { margin-right: auto; color: #dd6b20; font-size: 0.85rem; font-style: italic; }
+  .no-data { color: #a0aec0; padding: 20px; text-align: center; font-style: italic; }
+  .emp-suggest { padding: 12px 16px; cursor: pointer; font-size: 1rem; border-bottom: 1px solid #f0f0f0; }
+  .emp-suggest:last-child { border-bottom: none; }
+  .emp-suggest:hover { background: #ebf4ff; }
+  .emp-suggest strong { color: #2b6cb0; }
+  .group-label { font-weight: 700; color: #4a5568; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; padding: 6px 4px 4px; border-bottom: 2px solid #e2e8f0; margin-bottom: 8px; }
+
+  /* SWAP ITEM (admin) */
+  .swap-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #f7fafc;
+    border-right: 4px solid #2b6cb0;
+    flex-wrap: wrap;
+  }
+  .swap-item .role { font-weight: 600; color: #2d3748; min-width: 100px; }
+  .swap-item select, .swap-item input {
+    flex: 1;
+    min-width: 130px;
+    padding: 8px 10px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: white;
+    outline: none;
+  }
+  .swap-item select:focus, .swap-item input:focus { border-color: #2b6cb0; }
+
+  /* WEEK VIEW */
+  .week-grid { display: grid; gap: 12px; }
+  .day-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
+  .day-card.today-day { box-shadow: 0 0 0 2px #38a169, 0 2px 12px rgba(56,161,105,0.2); }
+  .day-header {
+    padding: 10px 16px;
+    background: #edf2f7;
+    font-weight: 600;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-card.today-day .day-header { background: #c6f6d5; color: #276749; }
+  .today-badge {
+    background: #38a169;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .day-body { padding: 10px 16px; }
+  .day-shift {
+    display: flex;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+  }
+  .day-shift:last-child { border-bottom: none; }
+  .day-shift .dr { color: #718096; min-width: 130px; }
+  .day-shift .dn { color: #2d3748; font-weight: 500; }
+
+  /* EMPLOYEE VIEW */
+  .search-box {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .search-box input {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    font-family: inherit;
+  }
+  .search-box input:focus { border-color: #2b6cb0; }
+  .search-box button {
+    padding: 12px 24px;
+    background: #2b6cb0;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+  .search-box button:hover { background: #2c5282; }
+
+  .emp-result {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .emp-header {
+    background: linear-gradient(135deg, #6b46c1, #553c9a);
+    color: white;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+  }
+  .emp-week { padding: 16px; }
+  .emp-day {
+    display: flex;
+    gap: 16px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+  }
+  .emp-day.has-shift { background: #f0f4ff; border-right: 3px solid #6b46c1; }
+  .emp-day.today-emp { background: #f0fff4; border-right: 3px solid #38a169; }
+  .emp-day.no-shift { opacity: 0.5; }
+  .emp-day .eday { min-width: 80px; font-weight: 600; color: #4a5568; }
+  .emp-day .eshift { color: #2d3748; }
+  .emp-day .eoff { color: #a0aec0; font-style: italic; }
+
+  /* ADMIN VIEW */
+  .admin-login {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 380px;
+    margin: 0 auto;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    text-align: center;
+  }
+  .admin-login h2 { margin-bottom: 20px; color: #2d3748; }
+  .admin-login input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    margin-bottom: 12px;
+    font-family: inherit;
+    text-align: center;
+  }
+  .admin-login button {
+    width: 100%;
+    padding: 12px;
+    background: #c53030;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .admin-login button:hover { background: #9b2c2c; }
+  .err { color: #c53030; font-size: 0.85rem; margin-top: 8px; }
+
+  .admin-panel h2 { margin-bottom: 20px; color: #2d3748; }
+  .admin-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .admin-toolbar input, .admin-toolbar select {
+    padding: 8px 12px;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+  }
+  .admin-toolbar input:focus, .admin-toolbar select:focus { border-color: #2b6cb0; }
+  .btn { padding: 8px 18px; border: none; border-radius: 8px; cursor: pointer; font-size: 0.9rem; font-family: inherit; }
+  .btn-blue { background: #2b6cb0; color: white; }
+  .btn-blue:hover { background: #2c5282; }
+  .btn-green { background: #38a169; color: white; }
+  .btn-green:hover { background: #276749; }
+  .btn-red { background: #c53030; color: white; }
+  .btn-red:hover { background: #9b2c2c; }
+  .btn-gray { background: #718096; color: white; }
+  .btn-gray:hover { background: #4a5568; }
+  .btn-orange { background: #dd6b20; color: white; }
+  .btn-orange:hover { background: #c05621; }
+
+  .schedule-table {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .schedule-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .schedule-table th {
+    background: #2b6cb0;
+    color: white;
+    padding: 12px 10px;
+    text-align: right;
+    font-size: 0.9rem;
+  }
+  .schedule-table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+  .schedule-table tr:last-child td { border-bottom: none; }
+  .schedule-table tr:hover td { background: #f7fafc; }
+  .schedule-table td input, .schedule-table td select {
+    width: 100%;
+    padding: 6px 8px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    background: #f7fafc;
+  }
+  .schedule-table td input:focus, .schedule-table td select:focus {
+    outline: none;
+    border-color: #2b6cb0;
+    background: white;
+  }
+  .del-btn {
+    background: none;
+    border: none;
+    color: #fc8181;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 4px 8px;
+  }
+  .del-btn:hover { color: #c53030; }
+
+  .week-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 12px 16px;
+    border-radius: 10px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+    margin-bottom: 20px;
+  }
+  .week-selector label { font-weight: 600; color: #4a5568; }
+  .week-selector input[type=date] {
+    padding: 6px 10px;
+    border: 2px solid #e2e8f0;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .week-selector input[type=date]:focus { border-color: #2b6cb0; }
+
+  .save-bar {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .save-bar span { color: #718096; font-size: 0.85rem; flex: 1; }
+
+  .hidden { display: none !important; }
+
+  /* mobile card-style shift editing */
+  .shift-edit-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    padding: 14px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .shift-edit-card .card-day {
+    font-weight: 700;
+    color: #2b6cb0;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
+  .shift-edit-card .field-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 8px;
+  }
+  .shift-edit-card label { font-size: 0.8rem; color: #718096; }
+  .shift-edit-card input, .shift-edit-card select {
+    padding: 9px 12px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+  }
+  .shift-edit-card input:focus, .shift-edit-card select:focus { border-color: #2b6cb0; }
+  .shift-edit-card .card-actions { display: flex; justify-content: flex-end; }
+  .add-form-card {
+    background: #f0f7ff;
+    border: 2px dashed #90cdf4;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .add-form-card h3 { color: #2b6cb0; margin-bottom: 12px; font-size: 1rem; }
+  .add-form-card .field-row { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+  .add-form-card label { font-size: 0.8rem; color: #4a5568; font-weight: 600; }
+  .add-form-card input, .add-form-card select {
+    padding: 10px 12px;
+    border: 1.5px solid #bee3f8;
+    border-radius: 7px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    width: 100%;
+    outline: none;
+    background: white;
+  }
+  .add-form-card input:focus, .add-form-card select:focus { border-color: #2b6cb0; }
+
+  /* ── BOTTOM NAV (mobile) ── */
+  .bottom-nav {
+    display: none;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #fff;
+    border-top: 1px solid #e2e8f0;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-nav-inner {
+    display: flex;
+    height: 62px;
+  }
+  .bnav-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    cursor: pointer;
+    color: #a0aec0;
+    font-size: 0.68rem;
+    border: none;
+    background: none;
+    font-family: inherit;
+    -webkit-tap-highlight-color: transparent;
+    transition: color 0.15s;
+  }
+  .bnav-btn .icon { font-size: 1.5rem; line-height: 1; }
+  .bnav-btn.active { color: #2b6cb0; }
+  .bnav-btn.active .icon { transform: scale(1.1); }
+
+  /* ── DESKTOP TABS ── */
+  .tabs { display: flex; background: #fff; border-bottom: 2px solid #e2e8f0; padding: 0 20px; }
+  .tab { padding: 12px 24px; cursor: pointer; font-size: 0.95rem; border-bottom: 3px solid transparent; color: #718096; transition: all 0.2s; }
+  .tab.active { color: #2b6cb0; border-bottom-color: #2b6cb0; font-weight: 600; }
+  .tab:hover { color: #2b6cb0; }
+
+  /* ── MOBILE OVERRIDES ── */
+  @media (max-width: 640px) {
+    .tabs { display: none; }
+    .bottom-nav { display: block; }
+    .container { padding: 16px 14px 80px; }
+    header { padding: 14px 16px; }
+    header h1 { font-size: 1.25rem; }
+
+    .shift-item { flex-wrap: wrap; gap: 4px; }
+    .shift-item .note { margin-right: 0; width: 100%; }
+    .shift-item .role { min-width: unset; font-size: 1rem; }
+    .shift-item .name { font-size: 1rem; }
+    .shift-item { padding: 14px 16px; }
+
+    .swap-item { flex-direction: column; align-items: stretch; padding: 12px; }
+    .swap-item .role { font-size: 1rem; }
+    .swap-item select, .swap-item input { width: 100%; padding: 12px; font-size: 1rem; }
+
+    .day-header { font-size: 1rem; padding: 12px 16px; }
+    .day-shift { font-size: 1rem; padding: 8px 0; }
+    .day-shift .dr { min-width: 90px; }
+
+    .search-box input { font-size: 1rem; padding: 14px 16px; }
+    .search-box button { padding: 14px 20px; font-size: 1rem; }
+    .emp-day { padding: 12px 14px; }
+    .emp-day .eday { min-width: 70px; font-size: 0.9rem; }
+    .emp-day .eshift { font-size: 0.95rem; }
+
+    .schedule-table { display: none; }
+    #mobileCards { display: block; }
+    .week-selector { flex-wrap: wrap; gap: 8px; }
+    .week-selector input[type=date] { flex: 1; min-width: 140px; }
+    .save-bar { flex-direction: column; }
+    .save-bar button { width: 100%; padding: 14px; font-size: 1rem; }
+    .admin-toolbar { flex-direction: column; }
+    .admin-toolbar input, .admin-toolbar select, .admin-toolbar .btn { width: 100%; padding: 12px; font-size: 1rem; }
+
+    .today-header { font-size: 1.05rem; padding: 14px 18px; }
+    .no-data { font-size: 1rem; padding: 24px; }
+  }
+  @media (min-width: 641px) {
+    #mobileCards { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <svg class="wolfson-logo" viewBox="0 0 160 56" xmlns="http://www.w3.org/2000/svg">
+      <!-- logo mark -->
+      <rect x="2" y="2" width="24" height="24" fill="#2147a8"/>
+      <polygon points="28,2 52,2 52,26" fill="#f5c200"/>
+      <circle cx="13" cy="42" r="12" fill="#d32020"/>
+      <line x1="28" y1="30" x2="52" y2="30" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="38" x2="52" y2="38" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="46" x2="52" y2="46" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <line x1="28" y1="54" x2="52" y2="54" stroke="#1e7e34" stroke-width="4" stroke-linecap="round"/>
+      <!-- text -->
+      <text x="60" y="22" font-family="Arial" font-size="13" font-weight="700" fill="white">משמרות טקסטיל</text>
+      <text x="60" y="38" font-family="Arial" font-size="9" fill="rgba(255,255,255,0.75)">המרכז הרפואי וולפסון</text>
+    </svg>
+    <div class="header-titles">
+      <h1>משמרות טקסטיל</h1>
+      <span class="subtitle">המרכז הרפואי ע"ש אדית וולפסון</span>
+    </div>
+  </div>
+  <span class="week-label" id="headerWeek"></span>
+</header>
+
+<!-- Install banner -->
+<div id="installBtn" style="display:flex;background:#f0f7ff;border-bottom:1px solid #bee3f8;padding:10px 16px;align-items:center;gap:10px;justify-content:space-between">
+  <div style="display:flex;align-items:center;gap:10px">
+    <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="44" height="44" fill="#2147a8"/>
+      <polygon points="54,2 98,2 98,46" fill="#f5c200"/>
+      <circle cx="24" cy="76" r="22" fill="#d32020"/>
+      <line x1="54" y1="56" x2="98" y2="56" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="68" x2="98" y2="68" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="80" x2="98" y2="80" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+      <line x1="54" y1="92" x2="98" y2="92" stroke="#1e7e34" stroke-width="7" stroke-linecap="round"/>
+    </svg>
+    <span style="font-size:0.9rem;color:#1a3a6b;font-weight:600">הוסף למסך הבית</span>
+  </div>
+  <button onclick="installApp()" style="background:#1a3a6b;color:white;border:none;border-radius:8px;padding:8px 18px;font-size:0.9rem;font-family:inherit;cursor:pointer">התקן</button>
+</div>
+
+<!-- Desktop tabs -->
+<div class="tabs">
+  <div class="tab active" onclick="showTab('today')">היום</div>
+  <div class="tab" onclick="showTab('week')">כל השבוע</div>
+  <div class="tab" onclick="showTab('employee')">חיפוש עובד</div>
+  <div class="tab" onclick="showTab('admin')">ניהול 🔒</div>
+</div>
+
+<!-- Mobile bottom nav -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <button class="bnav-btn active" id="bn-today" onclick="showTab('today')">
+      <span class="icon">☀️</span><span>היום</span>
+    </button>
+    <button class="bnav-btn" id="bn-week" onclick="showTab('week')">
+      <span class="icon">📅</span><span>שבוע</span>
+    </button>
+    <button class="bnav-btn" id="bn-employee" onclick="showTab('employee')">
+      <span class="icon">🔍</span><span>עובד</span>
+    </button>
+    <button class="bnav-btn" id="bn-admin" onclick="showTab('admin')">
+      <span class="icon">⚙️</span><span>ניהול</span>
+    </button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- TODAY TAB -->
+  <div id="tab-today">
+    <div class="today-card">
+      <div class="today-header" id="todayTitle">משמרות היום</div>
+      <div class="shift-list" id="todayList"></div>
+    </div>
+    <div class="today-card" style="margin-top:16px">
+      <div class="today-header" id="tomorrowTitle" style="background:linear-gradient(135deg,#6b46c1,#553c9a)">משמרות מחר</div>
+      <div class="shift-list" id="tomorrowList"></div>
+    </div>
+  </div>
+
+  <!-- WEEK TAB -->
+  <div id="tab-week" class="hidden">
+    <div class="week-grid" id="weekGrid"></div>
+  </div>
+
+  <!-- EMPLOYEE TAB -->
+  <div id="tab-employee" class="hidden">
+    <div class="search-box" style="position:relative;flex-direction:column;gap:0">
+      <div style="display:flex;gap:10px;width:100%">
+        <input type="text" id="empSearch" placeholder="הכנס שם עובד..." autocomplete="off"
+          oninput="empAutocomplete()" onkeydown="empKeyNav(event)" style="flex:1">
+        <button onclick="empConfirm()">חפש</button>
+      </div>
+      <div id="empDropdown" style="display:none;position:absolute;top:54px;right:0;left:0;background:white;border:2px solid #2b6cb0;border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,0.12);z-index:200;max-height:260px;overflow-y:auto"></div>
+    </div>
+    <div id="empResult" style="margin-top:16px"></div>
+  </div>
+
+  <!-- ADMIN TAB -->
+  <div id="tab-admin" class="hidden">
+    <div id="adminLogin" class="admin-login">
+      <h2>🔒 כניסת מנהל</h2>
+      <input type="password" id="adminPass" placeholder="סיסמה" onkeydown="if(event.key==='Enter')adminLogin()">
+      <button onclick="adminLogin()">כניסה</button>
+      <div class="err hidden" id="adminErr">סיסמה שגויה</div>
+    </div>
+    <div id="adminPanel" class="admin-panel hidden">
+      <!-- SWAP SECTION (today/tomorrow) -->
+      <div id="swapSection"></div>
+
+      <!-- WEEK SEARCH (find & swap any shift this week, by employee name) -->
+      <div style="margin-top:24px">
+        <h2 style="margin-bottom:10px">🔍 חיפוש משמרות לפי עובד (כל השבוע)</h2>
+        <input type="text" id="weekSearchInput" placeholder="הקלד שם עובד לחיפוש..." oninput="renderWeekSearch()" style="width:100%;padding:12px;border:2px solid #e2e8f0;border-radius:8px;font-size:0.95rem;font-family:inherit;margin-bottom:12px">
+        <div id="weekSearchResults"></div>
+      </div>
+
+      <div id="moreDaysSection" class="hidden">
+        <div class="week-selector">
+          <label>שבוע:</label>
+          <input type="date" id="weekStart" onchange="changeWeek()">
+          <button class="btn btn-gray" onclick="prevWeek()">◀ שבוע קודם</button>
+          <button class="btn btn-gray" onclick="nextWeek()">שבוע הבא ▶</button>
+        </div>
+
+        <div class="admin-toolbar">
+          <select id="newDay">
+            <option value="0">ראשון</option>
+            <option value="1">שני</option>
+            <option value="2">שלישי</option>
+            <option value="3">רביעי</option>
+            <option value="4">חמישי</option>
+            <option value="5">שישי</option>
+            <option value="6">שבת</option>
+          </select>
+          <input type="text" id="newRole" placeholder="תפקיד / משמרת">
+          <input type="text" id="newName" placeholder="שם עובד">
+          <input type="text" id="newNote" placeholder="הערה / החלפה (לא חובה)">
+          <button class="btn btn-blue" onclick="addShift()">+ הוסף משמרת</button>
+        </div>
+
+        <!-- DESKTOP TABLE -->
+        <div class="schedule-table">
+          <table>
+            <thead>
+              <tr>
+                <th>יום</th>
+                <th>תפקיד / משמרת</th>
+                <th>עובד</th>
+                <th>הערה / החלפה</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="adminTable"></tbody>
+          </table>
+        </div>
+
+        <!-- MOBILE CARDS -->
+        <div id="mobileCards"></div>
+      </div>
+
+      <div class="save-bar">
+        <div id="githubSection" style="width:100%">
+          <div id="publishBar" style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-green" style="padding:12px 20px;font-size:1rem" onclick="publishToGitHub()">🌐 שמור לכולם</button>
+          </div>
+        </div>
+        <button class="btn btn-orange" onclick="adminLogout()">התנתק</button>
+        <button class="btn btn-gray" onclick="downloadHTML()">💾 הורד HTML</button>
+      </div>
+      <div id="publishStatus" style="margin-top:10px;padding:10px;border-radius:8px;display:none;font-size:0.9rem;text-align:center"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// snapshot of the original page source, captured before any DOM mutation —
+// used as the basis for publish/download so admin UI state never leaks into the saved file
+const PRISTINE_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+// ============================================================
+// DATA — עדכן כאן את הסידור (או השתמש במצב מנהל)
+// ============================================================
+const ADMIN_PASSWORD = "1221"; // ← שנה סיסמה!
+
+// weekStart: תאריך ראשון של השבוע (ראשון) בפורמט YYYY-MM-DD
+let scheduleData = {
+  "weekStart": "2026-07-19",
+  "shifts": [
+  {
+    "day": 5,
+    "role": "ב-פ",
+    "name": "דני וודגה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "פרסונל20:00",
+    "name": "דני וודגה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "פנטה טגאיא",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב-מ/פ",
+    "name": "פנטה טגאיא",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב-פ",
+    "name": "פנטה טגאיא",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-מ/פ",
+    "name": "פנטה טגאיא",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב-05:00",
+    "name": "פנטה טגאיא",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב-מ/פ",
+    "name": "גושה סמין",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב-05:00",
+    "name": "גושה סמין",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב-מ/פ",
+    "name": "גושה סמין",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-פ",
+    "name": "גושה סמין",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב-מ/פ",
+    "name": "גושה סמין",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "צ'קולה בדמאו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע-פ",
+    "name": "צ'קולה בדמאו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע-אחראי",
+    "name": "צ'קולה בדמאו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "א",
+    "name": "צ'קולה בדמאו",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "א",
+    "name": "צ'קולה בדמאו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב-מ/פ",
+    "name": "קסה אספאו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב-05:00",
+    "name": "קסה אספאו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-05:00",
+    "name": "קסה אספאו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "קסה אספאו",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "פרסונל20:00",
+    "name": "קסה אספאו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "א",
+    "name": "בלאצ'או הבטאם",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "א",
+    "name": "בלאצ'או הבטאם",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "א",
+    "name": "בלאצ'או הבטאם",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע-פ",
+    "name": "בלאצ'או הבטאם",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "א",
+    "name": "בלאצ'או הבטאם",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "גולה אמבסאו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "גולה אמבסאו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב-05:00",
+    "name": "גולה אמבסאו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-גיהוץ",
+    "name": "גולה אמבסאו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "גולה אמבסאו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "מ",
+    "name": "יהונה גוואדי",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב-ייבוש",
+    "name": "יהונה גוואדי",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "מ",
+    "name": "יהונה גוואדי",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-ייבוש",
+    "name": "יהונה גוואדי",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "מ",
+    "name": "יהונה גוואדי",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע",
+    "name": "משה צקול",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע",
+    "name": "משה צקול",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "עמ",
+    "name": "משה צקול",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע",
+    "name": "משה צקול",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ע/עמ",
+    "name": "משה צקול",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "עא",
+    "name": "אבי אסממאו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "עא",
+    "name": "אבי אסממאו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "עא",
+    "name": "אבי אסממאו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע-אחראי",
+    "name": "אבי אסממאו",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "מחסן/גיהוץ20:00",
+    "name": "אבי אסממאו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "א",
+    "name": "דמל קאסה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "א",
+    "name": "דמל קאסה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "א",
+    "name": "דמל קאסה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "א",
+    "name": "דמל קאסה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "א",
+    "name": "דמל קאסה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "רפאל יחנוב",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "רפאל יחנוב",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "רפאל יחנוב",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "טספיי אצנפה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "עא",
+    "name": "טספיי אצנפה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע",
+    "name": "טספיי אצנפה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "עא",
+    "name": "טספיי אצנפה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "מחסן22:00",
+    "name": "טספיי אצנפה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב-ייבוש",
+    "name": "מוקטו גרמאו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "מ",
+    "name": "מוקטו גרמאו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב-ייבוש",
+    "name": "מוקטו גרמאו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "מ",
+    "name": "מוקטו גרמאו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב-ייבוש",
+    "name": "מוקטו גרמאו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "מלאק אבבה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע-פ",
+    "name": "מלאק אבבה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע",
+    "name": "מלאק אבבה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "עא",
+    "name": "מלאק אבבה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "ב",
+    "name": "מלאק אבבה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע-פ",
+    "name": "גטא'צ'או אסאייה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "עא",
+    "name": "גטא'צ'או אסאייה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע-אחראי",
+    "name": "גטא'צ'או אסאייה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע",
+    "name": "גטא'צ'או אסאייה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "עא",
+    "name": "גטא'צ'או אסאייה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "אברראו צקול",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "אברראו צקול",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אברראו צקול",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "אברראו צקול",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "אברראו צקול",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב-עגלות",
+    "name": "מספון דלנסאו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "מספון דלנסאו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב-ווילונות",
+    "name": "מספון דלנסאו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב-גיהוץ",
+    "name": "מספון דלנסאו",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "ע",
+    "name": "מספון דלנסאו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע",
+    "name": "אקלילו עלמסט",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע",
+    "name": "אקלילו עלמסט",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע",
+    "name": "אקלילו עלמסט",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע",
+    "name": "אקלילו עלמסט",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "א",
+    "name": "אקלילו עלמסט",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע",
+    "name": "קאסאו האילה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע",
+    "name": "קאסאו האילה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "עא",
+    "name": "קאסאו האילה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "עא",
+    "name": "קאסאו האילה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "מחסן22:00",
+    "name": "קאסאו האילה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע",
+    "name": "וודו אספה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע-אחראי",
+    "name": "וודו אספה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע-ייבוש",
+    "name": "וודו אספה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע-פ",
+    "name": "וודו אספה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "וודו אספה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב-ווילונות",
+    "name": "בריהון אייאיו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב-ווילונות",
+    "name": "בריהון אייאיו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב-ווילונות",
+    "name": "בריהון אייאיו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב-ווילונות",
+    "name": "בריהון אייאיו",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "מחסן22:00",
+    "name": "בריהון אייאיו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "אבינט אבאוה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב-ייבוש",
+    "name": "אבינט אבאוה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אבינט אבאוה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע",
+    "name": "אבינט אבאוה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "אבינט אבאוה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "א",
+    "name": "אילה אונקאהונה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "אילה אונקאהונה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אילה אונקאהונה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "א",
+    "name": "אילה אונקאהונה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "עא",
+    "name": "אילה אונקאהונה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "עא",
+    "name": "מולה קאסה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "עא",
+    "name": "מולה קאסה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "א",
+    "name": "מולה קאסה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "מולה קאסה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "ייבוש20:00",
+    "name": "מולה קאסה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "עמ",
+    "name": "אדנה בזה",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ע-ייבוש",
+    "name": "אדנה בזה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "עמ",
+    "name": "אדנה בזה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ע-ייבוש",
+    "name": "אדנה בזה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "מכונות20:00",
+    "name": "אדנה בזה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "א",
+    "name": "רפאלוב דוד",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "א",
+    "name": "רפאלוב דוד",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "א",
+    "name": "רפאלוב דוד",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "א",
+    "name": "רפאלוב דוד",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "א",
+    "name": "רפאלוב דוד",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע-אחראי",
+    "name": "אלמו ביקאייה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ע",
+    "name": "אלמו ביקאייה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אלמו ביקאייה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "אלמו ביקאייה",
+    "note": ""
+  },
+  {
+    "day": 6,
+    "role": "עא",
+    "name": "אלמו ביקאייה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "שימונוב ניסן",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "מ",
+    "name": "שימונוב ניסן",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "שימונוב ניסן",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "שימונוב ניסן",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "שימונוב ניסן",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "אמארה סטארגו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "אמארה סטארגו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אמארה סטארגו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "אמארה סטארגו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ע-ייבוש",
+    "name": "מברטו ברהנו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "עמ",
+    "name": "מברטו ברהנו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ע-ייבוש",
+    "name": "מברטו ברהנו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "עמ",
+    "name": "מברטו ברהנו",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ע-ייבוש",
+    "name": "מברטו ברהנו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "בתיה אלמיהו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "בתיה אלמיהו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "בתיה אלמיהו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "בתיה אלמיהו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "טקלה פקדו טזרה",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "טקלה פקדו טזרה",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "טקלה פקדו טזרה",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "טקלה פקדו טזרה",
+    "note": ""
+  },
+  {
+    "day": 5,
+    "role": "ב",
+    "name": "טקלה פקדו טזרה",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "אמה אראנוב",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "אמה אראנוב",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "אמה אראנוב",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "אמה אראנוב",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "אמה אראנוב",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "לריסה גולקרוב",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "לריסה גולקרוב",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "לריסה גולקרוב",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "לריסה גולקרוב",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "לריסה גולקרוב",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "יפה קוניו",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "יפה קוניו",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "יפה קוניו",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "יפה קוניו",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "יפה קוניו",
+    "note": ""
+  },
+  {
+    "day": 0,
+    "role": "ב",
+    "name": "גלית עזר אוזר",
+    "note": ""
+  },
+  {
+    "day": 1,
+    "role": "ב",
+    "name": "גלית עזר אוזר",
+    "note": ""
+  },
+  {
+    "day": 2,
+    "role": "ב",
+    "name": "גלית עזר אוזר",
+    "note": ""
+  },
+  {
+    "day": 3,
+    "role": "ב",
+    "name": "גלית עזר אוזר",
+    "note": ""
+  },
+  {
+    "day": 4,
+    "role": "ב",
+    "name": "גלית עזר אוזר",
+    "note": ""
+  }
+]
+};
+// ============================================================
+
+const DAYS_HE = ["ראשון","שני","שלישי","רביעי","חמישי","שישי","שבת"];
+function isNightRole(role) {
+  const m = role.match(/(\d{1,2}):00/);
+  if (m && parseInt(m[1], 10) >= 20) return true;
+  return role === 'מ';
+}
+function roleOrder(role) {
+  // Shabbat night roles (with time) go last — handled separately
+  if (/\d{1,2}:\d{2}/.test(role)) return 90; // פרסונל20:00, מחסן22:00 etc
+  if (role === 'א') return 1;
+  if (role === 'ב') return 2;
+  if (role === 'מ') return 3;
+  if (role === 'ייבוש') return 4;
+  if (role === 'גיהוץ') return 5;
+  if (role.startsWith('ב')) return 6;
+  if (role === 'עא') return 7;
+  if (role === 'ע' || role === 'ע ') return 8;
+  if (role === 'עמ') return 9;
+  if (role === 'ע-ייבוש') return 10;
+  if (role.startsWith('ע')) return 11;
+  return 50;
+}
+function sortShifts(arr) {
+  return [...arr].sort((a, b) => roleOrder(a.role) - roleOrder(b.role) || a.name.localeCompare(b.name, 'he'));
+}
+const DAYS_JS = [0,1,2,3,4,5,6]; // JS: 0=Sun
+
+let currentTab = 'today';
+let adminLoggedIn = false;
+
+function parseWeekStart() {
+  return new Date(scheduleData.weekStart + "T00:00:00");
+}
+
+function getWeekDates() {
+  const ws = parseWeekStart();
+  return DAYS_HE.map((_, i) => {
+    const d = new Date(ws);
+    d.setDate(ws.getDate() + i);
+    return d;
+  });
+}
+
+function todayIndex() {
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const dates = getWeekDates();
+  return dates.findIndex(d => d.toDateString() === today.toDateString());
+}
+
+function formatDate(d) {
+  return d.toLocaleDateString('he-IL', { day: 'numeric', month: 'numeric' });
+}
+
+function showTab(name) {
+  ['today','week','employee','admin'].forEach(t => {
+    document.getElementById('tab-' + t).classList.add('hidden');
+  });
+  document.getElementById('tab-' + name).classList.remove('hidden');
+  document.querySelectorAll('.tab').forEach((el, i) => {
+    el.classList.toggle('active', ['today','week','employee','admin'][i] === name);
+  });
+  ['today','week','employee','admin'].forEach(t => {
+    const bn = document.getElementById('bn-' + t);
+    if (bn) bn.classList.toggle('active', t === name);
+  });
+  currentTab = name;
+  window.scrollTo(0, 0);
+  if (name === 'today') renderToday();
+  if (name === 'week') renderWeek();
+  if (name === 'admin' && adminLoggedIn) renderAdminTable();
+}
+
+// ---- PWA INSTALL ----
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'flex';
+});
+window.addEventListener('appinstalled', () => {
+  const btn = document.getElementById('installBtn');
+  if (btn) btn.style.display = 'none';
+});
+
+function installApp() {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(() => { deferredPrompt = null; });
+    return;
+  }
+  const ua = navigator.userAgent || '';
+  if (/iphone|ipad|ipod/i.test(ua)) {
+    alert('להוספה למסך הבית ב-iPhone:\n1. הקש על כפתור השיתוף (Share) בתחתית המסך\n2. גלול ובחר "הוסף למסך הבית"');
+  } else {
+    alert('להוספה למסך הבית:\n1. הקש על שלוש הנקודות ⋮ בפינת הדפדפן\n2. בחר "הוספה למסך הבית" או "התקנת אפליקציה"');
+  }
+}
+
+// ---- HEADER ----
+function updateHeader() {
+  const dates = getWeekDates();
+  const start = dates[0], end = dates[6];
+  document.getElementById('headerWeek').textContent =
+    `שבוע ${formatDate(start)} – ${formatDate(end)}`;
+  const ws = parseWeekStart();
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+}
+
+// ---- TODAY ----
+function renderToday() {
+  const ti = todayIndex();
+  const list = document.getElementById('todayList');
+  const title = document.getElementById('todayTitle');
+  const dates = getWeekDates();
+
+  if (ti === -1) {
+    title.textContent = "אין סידור לשבוע זה";
+    list.innerHTML = '<div class="no-data">הסידור הנוכחי אינו כולל את היום</div>';
+    return;
+  }
+
+  const today = dates[ti];
+  title.textContent = `משמרות היום — ${DAYS_HE[ti]}, ${formatDate(today)}`;
+
+  const shifts = scheduleData.shifts.filter(s => s.day === ti);
+  if (!shifts.length) {
+    list.innerHTML = '<div class="no-data">אין משמרות מוגדרות להיום</div>';
+    return;
+  }
+
+  const isShabbat = ti === 6;
+  const morning = sortShifts(shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role))));
+  const evening = sortShifts(shifts.filter(s => s.role.startsWith('ע')));
+  const night = isShabbat ? sortShifts(shifts.filter(s => isNightRole(s.role))) : [];
+
+  function shiftCards(arr) {
+    return arr.map(s => `
+      <div class="shift-item">
+        <span class="role">${s.role}</span>
+        <span class="name">${s.name}</span>
+        ${s.note ? `<span class="note">🔄 ${s.note}</span>` : ''}
+      </div>`).join('');
+  }
+
+  let html = '';
+  if (morning.length) {
+    html += `<div class="group-label">☀️ בוקר</div>${shiftCards(morning)}`;
+  }
+  if (evening.length) {
+    html += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(evening)}`;
+  }
+  if (night.length) {
+    html += `<div class="group-label" style="margin-top:14px">🌙 לילה</div>${shiftCards(night)}`;
+  }
+  list.innerHTML = html;
+
+  // ---- TOMORROW ----
+  const tList = document.getElementById('tomorrowList');
+  const tTitle = document.getElementById('tomorrowTitle');
+  const tom = (ti + 1) % 7;
+  const tomDate = dates[tom] || null;
+
+  if (ti === 6 || !tomDate) {
+    tTitle.textContent = 'משמרות מחר';
+    tList.innerHTML = '<div class="no-data">מחר מחוץ לשבוע זה</div>';
+  } else {
+    tTitle.textContent = `משמרות מחר — ${DAYS_HE[tom]}, ${formatDate(tomDate)}`;
+    const tShifts = scheduleData.shifts.filter(s => s.day === tom);
+    if (!tShifts.length) {
+      tList.innerHTML = '<div class="no-data">אין משמרות מוגדרות למחר</div>';
+    } else {
+      const tIsShabbat = tom === 6;
+      const tm = sortShifts(tShifts.filter(s => !s.role.startsWith('ע') && !(tIsShabbat && isNightRole(s.role))));
+      const te = sortShifts(tShifts.filter(s => s.role.startsWith('ע')));
+      const tn = tIsShabbat ? sortShifts(tShifts.filter(s => isNightRole(s.role))) : [];
+      let th = '';
+      if (tm.length) th += `<div class="group-label">☀️ בוקר</div>${shiftCards(tm)}`;
+      if (te.length) th += `<div class="group-label" style="margin-top:14px">🌆 ערב</div>${shiftCards(te)}`;
+      if (tn.length) th += `<div class="group-label" style="margin-top:14px">🌙 לילה</div>${shiftCards(tn)}`;
+      tList.innerHTML = th;
+    }
+  }
+
+}
+
+// ---- WEEK ----
+function renderWeek() {
+  const dates = getWeekDates();
+  const ti = todayIndex();
+  const grid = document.getElementById('weekGrid');
+  grid.innerHTML = dates.map((d, i) => {
+    const shifts = scheduleData.shifts.filter(s => s.day === i);
+    const isToday = i === ti;
+    return `
+      <div class="day-card ${isToday ? 'today-day' : ''}">
+        <div class="day-header">
+          ${DAYS_HE[i]}, ${formatDate(d)}
+          ${isToday ? '<span class="today-badge">היום</span>' : ''}
+        </div>
+        <div class="day-body">
+          ${shifts.length ? shifts.map(s => `
+            <div class="day-shift">
+              <span class="dr">${s.role}</span>
+              <span class="dn">${s.name}${s.note ? ' · 🔄 ' + s.note : ''}</span>
+            </div>
+          `).join('') : '<div class="no-data" style="padding:8px 0;font-size:0.85rem">אין משמרות</div>'}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+// ---- EMPLOYEE AUTOCOMPLETE ----
+let empSelectedIndex = -1;
+
+function getUniqueNames() {
+  return [...new Set(scheduleData.shifts.map(s => s.name))].sort();
+}
+
+function empAutocomplete() {
+  const q = document.getElementById('empSearch').value.trim().toLowerCase();
+  const dd = document.getElementById('empDropdown');
+  document.getElementById('empResult').innerHTML = '';
+  empSelectedIndex = -1;
+  if (q.length < 1) { dd.style.display = 'none'; return; }
+  const matches = getUniqueNames().filter(n => n.toLowerCase().includes(q));
+  if (!matches.length) { dd.style.display = 'none'; return; }
+  dd.style.display = 'block';
+  dd.innerHTML = matches.map((n, i) => `
+    <div class="emp-suggest" data-name="${n}" onclick="empSelect('${n.replace(/'/g,"\\'")}')">
+      ${n.replace(new RegExp('(' + q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&') + ')', 'gi'), '<strong>$1</strong>')}
+    </div>`).join('');
+}
+
+function empSelect(name) {
+  document.getElementById('empSearch').value = name;
+  document.getElementById('empDropdown').style.display = 'none';
+  empShowResult(name);
+}
+
+function empConfirm() {
+  const q = document.getElementById('empSearch').value.trim();
+  document.getElementById('empDropdown').style.display = 'none';
+  if (!q) return;
+  // find exact or best match
+  const names = getUniqueNames();
+  const exact = names.find(n => n.toLowerCase() === q.toLowerCase());
+  const partial = names.filter(n => n.toLowerCase().includes(q.toLowerCase()));
+  if (exact) empShowResult(exact);
+  else if (partial.length === 1) empShowResult(partial[0]);
+  else if (partial.length > 1) {
+    document.getElementById('empResult').innerHTML =
+      '<div class="no-data">נמצאו כמה תוצאות — בחר שם מהרשימה</div>';
+    empAutocomplete();
+  } else {
+    document.getElementById('empResult').innerHTML =
+      '<div class="no-data">לא נמצא עובד בשם זה</div>';
+  }
+}
+
+function empKeyNav(e) {
+  const dd = document.getElementById('empDropdown');
+  const items = dd.querySelectorAll('.emp-suggest');
+  if (!items.length) { if (e.key === 'Enter') empConfirm(); return; }
+  if (e.key === 'ArrowDown') { empSelectedIndex = Math.min(empSelectedIndex+1, items.length-1); }
+  else if (e.key === 'ArrowUp') { empSelectedIndex = Math.max(empSelectedIndex-1, 0); }
+  else if (e.key === 'Enter') {
+    if (empSelectedIndex >= 0) items[empSelectedIndex].click();
+    else empConfirm();
+    return;
+  } else return;
+  items.forEach((el,i) => el.style.background = i===empSelectedIndex ? '#ebf4ff' : '');
+  e.preventDefault();
+}
+
+function empShowResult(name) {
+  const dates = getWeekDates();
+  const ti = todayIndex();
+  const rows = dates.map((d, i) => {
+    const myShifts = scheduleData.shifts.filter(s => s.day === i && s.name === name);
+    const isToday = i === ti;
+    const cls = myShifts.length ? (isToday ? 'emp-day today-emp' : 'emp-day has-shift') : 'emp-day no-shift';
+    return `<div class="${cls}">
+      <span class="eday">${DAYS_HE[i]} ${formatDate(d)}</span>
+      ${myShifts.length
+        ? myShifts.map(s => `<span class="eshift">${s.role}${s.note ? ' · 🔄 '+s.note : ''}</span>`).join(' | ')
+        : '<span class="eoff">חופש / לא בסידור</span>'
+      }
+    </div>`;
+  }).join('');
+  document.getElementById('empResult').innerHTML = `
+    <div class="emp-result">
+      <div class="emp-header">סידור שבועי — ${name}</div>
+      <div class="emp-week">${rows}</div>
+    </div>`;
+}
+
+// close dropdown on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('#tab-employee')) {
+    document.getElementById('empDropdown').style.display = 'none';
+  }
+});
+
+// ---- ADMIN LOGIN ----
+function adminLogin() {
+  const p = document.getElementById('adminPass').value;
+  if (p === ADMIN_PASSWORD) {
+    adminLoggedIn = true;
+    document.getElementById('adminLogin').classList.add('hidden');
+    document.getElementById('adminPanel').classList.remove('hidden');
+    document.getElementById('weekStart').value = scheduleData.weekStart;
+    renderAdminTable();
+  } else {
+    document.getElementById('adminErr').classList.remove('hidden');
+  }
+}
+
+function saveDraft() {}
+function adminLogout() {
+  adminLoggedIn = false;
+  document.getElementById('adminLogin').classList.remove('hidden');
+  document.getElementById('adminPanel').classList.add('hidden');
+  document.getElementById('adminPass').value = '';
+  document.getElementById('adminErr').classList.add('hidden');
+}
+
+// ---- SWAP SECTION (today/tomorrow) ----
+function toggleMoreDays() {
+  const sec = document.getElementById('moreDaysSection');
+  const btn = document.getElementById('moreDaysBtn');
+  const show = sec.classList.contains('hidden');
+  sec.classList.toggle('hidden');
+  btn.textContent = show ? '📅 הסתר ימים נוספים' : '📅 ערוך ימים נוספים / הוספה / מחיקה';
+}
+
+function employeeOptions(selected) {
+  return getUniqueNames().map(n => `<option value="${n}" ${n===selected?'selected':''}>${n}</option>`).join('');
+}
+
+function renderSwapSection() {
+  const sec = document.getElementById('swapSection');
+  const dates = getWeekDates();
+  const ti = todayIndex();
+
+  if (ti === -1) {
+    sec.innerHTML = `<div class="no-data" style="padding:16px">השבוע הנבחר אינו כולל את היום. לחץ על "ערוך ימים נוספים" כדי לבחור שבוע אחר.</div>`;
+    return;
+  }
+
+  function group(arr, title) {
+    if (!arr.length) return '';
+    return `<div class="group-label">${title}</div>` + arr.map(s => {
+      const idx = scheduleData.shifts.indexOf(s);
+      return `
+        <div class="swap-item">
+          <span class="role">${s.role}</span>
+          <select onchange="updateShift(${idx},'name',this.value)">${employeeOptions(s.name)}</select>
+          <input value="${s.note||''}" placeholder="הערה (לא חובה)" onchange="updateShift(${idx},'note',this.value)">
+        </div>`;
+    }).join('');
+  }
+
+  function dayBlock(dayIdx, label, headerStyle) {
+    if (dayIdx < 0 || dayIdx > 6) {
+      return `<div class="today-card"><div class="today-header" style="${headerStyle}">${label}</div><div class="shift-list"><div class="no-data">מחוץ לשבוע הנבחר — השתמש ב"ערוך ימים נוספים"</div></div></div>`;
+    }
+    const shifts = scheduleData.shifts.filter(s => s.day === dayIdx);
+    const title = `${label} — ${DAYS_HE[dayIdx]}, ${formatDate(dates[dayIdx])}`;
+    if (!shifts.length) {
+      return `<div class="today-card"><div class="today-header" style="${headerStyle}">${title}</div><div class="shift-list"><div class="no-data">אין משמרות</div></div></div>`;
+    }
+    const isShabbat = dayIdx === 6;
+    const morning = sortShifts(shifts.filter(s => !s.role.startsWith('ע') && !(isShabbat && isNightRole(s.role))));
+    const evening = sortShifts(shifts.filter(s => s.role.startsWith('ע')));
+    const night = isShabbat ? sortShifts(shifts.filter(s => isNightRole(s.role))) : [];
+    return `<div class="today-card"><div class="today-header" style="${headerStyle}">${title}</div><div class="shift-list">${group(morning,'☀️ בוקר')}${group(evening,'🌆 ערב')}${group(night,'🌙 לילה')}</div></div>`;
+  }
+
+  const tom = ti === 6 ? -1 : (ti + 1) % 7;
+  sec.innerHTML = `<h2 style="margin-bottom:14px">🔄 החלפות</h2>`
+    + dayBlock(ti, 'היום', '')
+    + `<div style="margin-top:16px">${dayBlock(tom, 'מחר', 'background:linear-gradient(135deg,#6b46c1,#553c9a)')}</div>`;
+}
+
+function renderWeekSearch() {
+  const box = document.getElementById('weekSearchResults');
+  const q = (document.getElementById('weekSearchInput').value || '').trim();
+  if (!q) { box.innerHTML = ''; return; }
+
+  const dates = getWeekDates();
+  const matches = scheduleData.shifts
+    .map((s, idx) => ({ s, idx }))
+    .filter(({ s }) => s.name.includes(q))
+    .sort((a, b) => a.s.day - b.s.day || (a.s.role > b.s.role ? 1 : -1));
+
+  if (!matches.length) {
+    box.innerHTML = `<div class="no-data">לא נמצאו משמרות לעובד "${q}"</div>`;
+    return;
+  }
+
+  box.innerHTML = matches.map(({ s, idx }) => `
+    <div class="swap-item">
+      <span class="role">${DAYS_HE[s.day]} ${formatDate(dates[s.day])} — ${s.role}</span>
+      <select onchange="updateShift(${idx},'name',this.value)">${employeeOptions(s.name)}</select>
+      <input value="${s.note||''}" placeholder="הערה (לא חובה)" onchange="updateShift(${idx},'note',this.value)">
+    </div>`).join('');
+}
+
+// ---- ADMIN TABLE ----
+function renderAdminTable() {
+  renderSwapSection();
+  renderWeekSearch();
+  const sorted = [...scheduleData.shifts].sort((a,b) => a.day - b.day || (a.role > b.role ? 1 : -1));
+
+  // Desktop table
+  const tbody = document.getElementById('adminTable');
+  tbody.innerHTML = sorted.map(s => {
+    const idx = scheduleData.shifts.indexOf(s);
+    return `<tr>
+      <td>
+        <select onchange="updateShift(${idx},'day',this.value)">
+          ${DAYS_HE.map((d,di) => `<option value="${di}" ${s.day==di?'selected':''}>${d}</option>`).join('')}
+        </select>
+      </td>
+      <td><input value="${s.role}" onchange="updateShift(${idx},'role',this.value)"></td>
+      <td><input value="${s.name}" onchange="updateShift(${idx},'name',this.value)"></td>
+      <td><input value="${s.note||''}" placeholder="לדוג' החלפה עם דני" onchange="updateShift(${idx},'note',this.value)"></td>
+      <td><button class="del-btn" onclick="deleteShift(${idx},this)">🗑</button></td>
+    </tr>`;
+  }).join('');
+
+  // Mobile cards
+  const mc = document.getElementById('mobileCards');
+  // Add-shift form at top
+  const addForm = `
+    <div class="add-form-card">
+      <h3>+ הוסף משמרת</h3>
+      <div class="field-row"><label>יום</label>
+        <select id="m_newDay">
+          ${DAYS_HE.map((d,i)=>`<option value="${i}">${d}</option>`).join('')}
+        </select>
+      </div>
+      <div class="field-row"><label>משמרת / תפקיד</label><input id="m_newRole" placeholder="בוקר / ערב..."></div>
+      <div class="field-row"><label>שם עובד</label><input id="m_newName" placeholder="שם מלא"></div>
+      <div class="field-row"><label>הערה / החלפה (לא חובה)</label><input id="m_newNote" placeholder="לדוג' החלפה עם דני"></div>
+      <button class="btn btn-blue" style="width:100%;padding:12px;font-size:1rem;" onclick="mobileAddShift()">הוסף</button>
+    </div>`;
+
+  const cards = sorted.map(s => {
+    const idx = scheduleData.shifts.indexOf(s);
+    return `
+      <div class="shift-edit-card">
+        <div class="card-day">${DAYS_HE[s.day]}</div>
+        <div class="field-row"><label>משמרת</label>
+          <input value="${s.role}" onchange="updateShift(${idx},'role',this.value)">
+        </div>
+        <div class="field-row"><label>עובד</label>
+          <input value="${s.name}" onchange="updateShift(${idx},'name',this.value)">
+        </div>
+        <div class="field-row"><label>הערה / החלפה</label>
+          <input value="${s.note||''}" placeholder="לדוג' החלפה עם דני" onchange="updateShift(${idx},'note',this.value)">
+        </div>
+        <div class="card-actions">
+          <button class="btn btn-red" onclick="deleteShift(${idx},this)">מחק 🗑</button>
+        </div>
+      </div>`;
+  }).join('');
+
+  mc.innerHTML = addForm + cards;
+}
+
+function mobileAddShift() {
+  const day = parseInt(document.getElementById('m_newDay').value);
+  const role = document.getElementById('m_newRole').value.trim();
+  const name = document.getElementById('m_newName').value.trim();
+  const note = document.getElementById('m_newNote').value.trim();
+  if (!role || !name) { alert('נא למלא משמרת ושם'); return; }
+  scheduleData.shifts.push({ day, role, name, note });
+  saveDraft();
+  renderAdminTable();
+}
+
+function updateShift(idx, field, val) {
+  if (field === 'day') scheduleData.shifts[idx].day = parseInt(val);
+  else scheduleData.shifts[idx][field] = val;
+  saveDraft();
+}
+
+function deleteShift(idx, btn) {
+  if (!btn._confirmPending) {
+    btn._confirmPending = true;
+    btn.textContent = 'בטוח? לחץ שוב';
+    btn.style.background = '#c53030';
+    setTimeout(() => { btn._confirmPending = false; btn.textContent = 'מחק 🗑'; btn.style.background = ''; }, 3000);
+    return;
+  }
+  scheduleData.shifts.splice(idx, 1);
+  saveDraft();
+  renderAdminTable();
+}
+
+function addShift() {
+  const day = parseInt(document.getElementById('newDay').value);
+  const role = document.getElementById('newRole').value.trim();
+  const name = document.getElementById('newName').value.trim();
+  const note = document.getElementById('newNote').value.trim();
+  if (!role || !name) { alert('נא למלא תפקיד ושם'); return; }
+  scheduleData.shifts.push({ day, role, name, note });
+  document.getElementById('newRole').value = '';
+  document.getElementById('newName').value = '';
+  document.getElementById('newNote').value = '';
+  saveDraft();
+  renderAdminTable();
+}
+
+// ---- WEEK NAVIGATION ----
+function changeWeek() {
+  scheduleData.weekStart = document.getElementById('weekStart').value;
+  updateHeader();
+  saveDraft();
+  if (currentTab !== 'admin') showTab(currentTab);
+  else { renderAdminTable(); }
+}
+
+function prevWeek() {
+  const d = parseWeekStart();
+  d.setDate(d.getDate() - 7);
+  scheduleData.weekStart = d.toISOString().slice(0,10);
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+  updateHeader();
+  saveDraft();
+  renderAdminTable();
+}
+
+function nextWeek() {
+  const d = parseWeekStart();
+  d.setDate(d.getDate() + 7);
+  scheduleData.weekStart = d.toISOString().slice(0,10);
+  document.getElementById('weekStart').value = scheduleData.weekStart;
+  updateHeader();
+  saveDraft();
+  renderAdminTable();
+}
+
+// ---- PUBLISH (via Cloudflare Worker proxy) ----
+const PUBLISH_WORKER_URL = 'https://sidur-publish.benilamd.workers.dev';
+const ADMIN_SECRET = 'wolfson1221';
+const ONESIGNAL_APP_ID = 'abfb85a0-c17f-4639-9230-012f28fa0c08';
+const ONESIGNAL_REST_KEY = '';
+
+window.OneSignalDeferred = window.OneSignalDeferred || [];
+OneSignalDeferred.push(async function(OneSignal) {
+  await OneSignal.init({
+    appId: ONESIGNAL_APP_ID,
+    notifyButton: { enable: false },
+    serviceWorkerParam: { scope: '/' },
+    serviceWorkerPath: '/OneSignalSDKWorker.js',
+  });
+});
+
+async function sendPushNotification(message) {
+  if (!ONESIGNAL_REST_KEY || ONESIGNAL_REST_KEY === 'ONESIGNAL_REST_KEY_HERE') return;
+  try {
+    await fetch('https://onesignal.com/api/v1/notifications', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Basic ' + ONESIGNAL_REST_KEY
+      },
+      body: JSON.stringify({
+        app_id: ONESIGNAL_APP_ID,
+        included_segments: ['All'],
+        headings: { he: 'סידור משמרות עודכן' },
+        contents: { he: message || 'שינוי חדש בסידור — לחץ לצפייה' },
+        url: 'https://benilamdan.github.io/sidur_live.html'
+      })
+    });
+  } catch(e) { /* push failed silently */ }
+}
+
+async function publishToGitHub() {
+  const status = document.getElementById('publishStatus');
+  status.style.display = 'block';
+  status.style.background = '#ebf8ff';
+  status.style.color = '#2b6cb0';
+  status.textContent = '⏳ מעלה לGitHub...';
+
+  try {
+    // Build updated HTML from the pristine source (so admin UI state never leaks in)
+    const dataStr = JSON.stringify(scheduleData, null, 2);
+    const updated = PRISTINE_HTML.replace(/let scheduleData = \{[\s\S]*?\n\};/, 'let scheduleData = ' + dataStr + ';');
+    if (updated === PRISTINE_HTML) throw new Error('עדכון הנתונים נכשל (תבנית לא נמצאה) — פנה לתמיכה');
+    const encoded = btoa(unescape(encodeURIComponent(updated)));
+
+    const pushRes = await fetch(PUBLISH_WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content: encoded, secret: ADMIN_SECRET })
+    });
+
+    if (pushRes.ok) {
+      status.style.background = '#f0fff4';
+      status.style.color = '#276749';
+      status.textContent = '✅ עודכן בהצלחה! כל העובדים רואים את השינוי תוך דקה.';
+      sendPushNotification('שינוי חדש בסידור המשמרות — לחץ לצפייה');
+    } else {
+      const err = await pushRes.text().catch(() => '');
+      throw new Error(`שגיאה (${pushRes.status}): ${err || pushRes.statusText}`);
+    }
+  } catch (e) {
+    status.style.background = '#fff5f5';
+    status.style.color = '#c53030';
+    if (e instanceof TypeError) {
+      status.textContent = '❌ בעיית תקשורת — בדוק חיבור אינטרנט ונסה שוב. (' + e.message + ')';
+    } else {
+      status.textContent = '❌ שגיאה: ' + e.message;
+    }
+  }
+}
+
+// ---- DOWNLOAD UPDATED HTML ----
+function downloadHTML() {
+  // inject updated data into the pristine source (so admin UI state never leaks in)
+  const dataStr = JSON.stringify(scheduleData, null, 2);
+  const updated = PRISTINE_HTML.replace(
+    /let scheduleData = \{[\s\S]*?\n\};/,
+    'let scheduleData = ' + dataStr + ';'
+  );
+  const blob = new Blob([updated], { type: 'text/html;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'sidur_live.html';
+  a.click();
+}
+
+// ---- INIT ----
+updateHeader();
+renderToday();
+</script>
+</body>
+</html>
